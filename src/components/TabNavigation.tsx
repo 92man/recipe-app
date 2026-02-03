@@ -7,6 +7,15 @@ export default function TabNavigation() {
 
   const tabs = [
     {
+      id: 'fridge' as const,
+      label: '냉장고',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      ),
+    },
+    {
       id: 'voice' as const,
       label: '음성',
       icon: (
@@ -59,7 +68,7 @@ export default function TabNavigation() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className="relative flex flex-col items-center py-2 px-5 rounded-xl transition-all duration-300"
+                  className="relative flex flex-col items-center py-2 px-3 rounded-xl transition-all duration-300"
                   style={{
                     color: isActive ? 'var(--accent-600)' : 'var(--text-muted)',
                   }}

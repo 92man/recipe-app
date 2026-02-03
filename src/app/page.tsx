@@ -8,6 +8,7 @@ import VoiceRecorder from '@/components/VoiceRecorder';
 import ImageAnalyzer from '@/components/ImageAnalyzer';
 import RecipeList from '@/components/RecipeList';
 import RecipeSearch from '@/components/RecipeSearch';
+import FridgeRecipe from '@/components/FridgeRecipe';
 import TabNavigation from '@/components/TabNavigation';
 import AuthForm from '@/components/AuthForm';
 import Footer from '@/components/Footer';
@@ -108,6 +109,7 @@ export default function Home() {
   }
 
   const tabDescriptions: Record<string, { title: string; subtitle: string; icon: string }> = {
+    fridge: { title: '냉장고 파먹기', subtitle: '있는 재료로 레시피 추천받기', icon: '🥬' },
     voice: { title: '음성 레시피', subtitle: '요리하며 음성으로 기록하세요', icon: '🎤' },
     image: { title: 'AI 분석', subtitle: '사진으로 레시피를 분석해요', icon: '📸' },
     search: { title: '레시피 검색', subtitle: '요리 이름으로 검색하세요', icon: '🔍' },
@@ -266,6 +268,7 @@ export default function Home() {
           </div>
         ) : (
           <>
+            {activeTab === 'fridge' && <FridgeRecipe />}
             {activeTab === 'voice' && <VoiceRecorder />}
             {activeTab === 'image' && <ImageAnalyzer />}
             {activeTab === 'search' && (

@@ -5,11 +5,11 @@ import { Recipe, FeedbackEntry } from '@/types';
 interface AppState {
   recipes: Recipe[];
   feedbackEntries: FeedbackEntry[];
-  activeTab: 'voice' | 'image' | 'list' | 'search';
+  activeTab: 'voice' | 'image' | 'list' | 'search' | 'fridge';
   theme: 'light' | 'dark';
 
   // Actions
-  setActiveTab: (tab: 'voice' | 'image' | 'list' | 'search') => void;
+  setActiveTab: (tab: 'voice' | 'image' | 'list' | 'search' | 'fridge') => void;
   setTheme: (theme: 'light' | 'dark') => void;
   toggleTheme: () => void;
   addRecipe: (recipe: Recipe) => void;
@@ -25,7 +25,7 @@ export const useStore = create<AppState>()(
     (set, get) => ({
       recipes: [],
       feedbackEntries: [],
-      activeTab: 'voice',
+      activeTab: 'fridge',
       theme: 'light',
 
       setActiveTab: (tab) => set({ activeTab: tab }),
