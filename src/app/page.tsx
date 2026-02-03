@@ -235,53 +235,59 @@ export default function Home() {
 
       {/* 탭 콘텐츠 */}
       <div className="relative opacity-0 animate-fade-in-up delay-3">
-        {!user && (activeTab === 'voice' || activeTab === 'image' || activeTab === 'list') ? (
-          <div className="p-5">
-            {/* 로그인 필요 안내 */}
-            <div className="recipe-card p-8 text-center mb-6">
-              <div
-                className="w-16 h-16 mx-auto mb-5 rounded-2xl flex items-center justify-center"
-                style={{ background: 'var(--accent-100)' }}
-              >
-                <svg className="w-8 h-8" style={{ color: 'var(--accent-600)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
-                로그인이 필요해요
-              </h2>
-              <p className="text-sm mb-6 leading-relaxed whitespace-pre-line" style={{ color: 'var(--text-muted)' }}>
-                {activeTab === 'voice' && '음성으로 레시피를 기록하려면\n로그인해주세요.'}
-                {activeTab === 'image' && 'AI 레시피 분석 기능을\n사용하려면 로그인해주세요.'}
-                {activeTab === 'list' && '저장된 레시피를 확인하려면\n로그인해주세요.'}
-              </p>
+        {/* 메인 기능 영역 */}
+        {activeTab === 'fridge' && <FridgeRecipe />}
+        {activeTab === 'voice' && (
+          user ? <VoiceRecorder /> : (
+            <div className="p-5">
               <button
                 onClick={() => setShowAuthModal(true)}
-                className="btn-primary"
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-medium flex items-center justify-center gap-2"
               >
-                로그인하기
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                로그인하고 음성 기록 시작하기
               </button>
             </div>
-
-            {/* 비로그인 사용자를 위한 콘텐츠 */}
-            <HomeContent />
-          </div>
-        ) : (
-          <>
-            {activeTab === 'fridge' && <FridgeRecipe />}
-            {activeTab === 'voice' && <VoiceRecorder />}
-            {activeTab === 'image' && <ImageAnalyzer />}
-            {activeTab === 'search' && (
-              <div>
-                <RecipeSearch />
-                <div className="px-5 pb-6">
-                  <HomeContent />
-                </div>
-              </div>
-            )}
-            {activeTab === 'list' && <RecipeList />}
-          </>
+          )
         )}
+        {activeTab === 'image' && (
+          user ? <ImageAnalyzer /> : (
+            <div className="p-5">
+              <button
+                onClick={() => setShowAuthModal(true)}
+                className="w-full py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-medium flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                로그인하고 AI 분석 시작하기
+              </button>
+            </div>
+          )
+        )}
+        {activeTab === 'search' && <RecipeSearch />}
+        {activeTab === 'list' && (
+          user ? <RecipeList /> : (
+            <div className="p-5">
+              <button
+                onClick={() => setShowAuthModal(true)}
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-medium flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                로그인하고 내 레시피 보기
+              </button>
+            </div>
+          )
+        )}
+
+        {/* 모든 탭에서 HomeContent 표시 */}
+        <div className="px-5 pb-6">
+          <HomeContent />
+        </div>
       </div>
 
       {/* 푸터 */}
