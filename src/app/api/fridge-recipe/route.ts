@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const prompt = `당신은 한국 요리 전문가입니다. 사용자가 가진 재료로 만들 수 있는 레시피를 추천해주세요.
 
