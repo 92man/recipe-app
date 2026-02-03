@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useStore } from '@/store/useStore';
 import { useAuth } from '@/components/AuthProvider';
 import VoiceRecorder from '@/components/VoiceRecorder';
@@ -54,6 +55,19 @@ export default function Home() {
             {activeTab === 'search' && '요리 이름으로 레시피를 검색하세요'}
             {activeTab === 'list' && '저장된 레시피를 확인하세요'}
           </p>
+          <div className="flex gap-3 mt-3 text-sm">
+            <Link href="/recipes" className="text-orange-600 hover:text-orange-700 transition-colors">
+              인기 레시피
+            </Link>
+            <span className="text-warm-300">|</span>
+            <Link href="/guide" className="text-orange-600 hover:text-orange-700 transition-colors">
+              요리 가이드
+            </Link>
+            <span className="text-warm-300">|</span>
+            <Link href="/tips" className="text-orange-600 hover:text-orange-700 transition-colors">
+              요리 팁
+            </Link>
+          </div>
         </div>
         <div className="h-4 bg-gradient-to-b from-warm-50/80 to-transparent" />
       </header>
