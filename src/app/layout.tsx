@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   description: "음성으로 레시피를 기록하고, 사진으로 요리를 분석하세요. AI가 재료와 조리법을 자동으로 정리해드립니다. 나만의 레시피 컬렉션을 만들어보세요.",
   keywords: ["레시피", "요리", "AI", "음성인식", "사진분석", "요리앱", "레시피앱", "cooking", "recipe"],
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
