@@ -50,12 +50,16 @@ export async function POST(request: NextRequest) {
     const completion = await groq.chat.completions.create({
       messages: [
         {
+          role: 'system',
+          content: '당신은 요리 레시피 전문가입니다. 모든 응답은 반드시 완벽한 한국어로 작성하세요. 깨진 문자나 이상한 기호 없이 자연스러운 한국어만 사용하세요.',
+        },
+        {
           role: 'user',
           content: prompt,
         },
       ],
-      model: 'llama-3.3-70b-versatile',
-      temperature: 0.7,
+      model: 'llama-3.1-8b-instant',
+      temperature: 0.5,
       max_tokens: 2048,
     });
 
