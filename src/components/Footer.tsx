@@ -28,8 +28,8 @@ export default function Footer() {
           AI가 당신의 요리를 더 쉽게 만들어드립니다.
         </p>
 
-        {/* 링크들 */}
-        <div className="flex justify-center gap-4 text-sm mb-6">
+        {/* 링크들 - 1행 */}
+        <div className="flex justify-center gap-4 text-sm mb-3">
           <Link
             href="/about"
             className="transition-colors"
@@ -40,6 +40,29 @@ export default function Footer() {
             서비스 소개
           </Link>
           <span style={{ color: 'var(--border-medium)' }}>·</span>
+          <Link
+            href="/faq"
+            className="transition-colors"
+            style={{ color: 'var(--text-muted)' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-600)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+          >
+            자주 묻는 질문
+          </Link>
+          <span style={{ color: 'var(--border-medium)' }}>·</span>
+          <Link
+            href="/contact"
+            className="transition-colors"
+            style={{ color: 'var(--text-muted)' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-600)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+          >
+            문의하기
+          </Link>
+        </div>
+
+        {/* 링크들 - 2행 */}
+        <div className="flex justify-center gap-4 text-sm mb-6">
           <Link
             href="/privacy"
             className="transition-colors"

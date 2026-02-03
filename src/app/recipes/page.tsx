@@ -7,6 +7,7 @@ export const metadata = {
 };
 
 const popularRecipes = [
+  // 한식
   {
     id: 'kimchi-jjigae',
     title: '김치찌개',
@@ -48,6 +49,57 @@ const popularRecipes = [
     tags: ['당면', '잔치음식', '명절'],
   },
   {
+    id: 'bibimbap',
+    title: '비빔밥',
+    description: '형형색색 나물과 고추장의 조화. 영양 균형이 완벽한 한국 대표 음식입니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '40분',
+    emoji: '🍚',
+    tags: ['밥요리', '나물', '건강식'],
+  },
+  {
+    id: 'samgyeopsal',
+    title: '삼겹살 구이',
+    description: '두툼한 삼겹살을 노릇하게 구워 쌈채소와 함께. 한국인이 사랑하는 고기 요리입니다.',
+    category: '한식',
+    difficulty: '쉬움',
+    time: '30분',
+    emoji: '🥓',
+    tags: ['고기', '구이', '회식'],
+  },
+  {
+    id: 'tteokbokki',
+    title: '떡볶이',
+    description: '매콤달콤한 국민 간식. 쫄깃한 떡과 어묵이 어우러진 추억의 분식입니다.',
+    category: '한식',
+    difficulty: '쉬움',
+    time: '25분',
+    emoji: '🍢',
+    tags: ['분식', '떡', '매운맛'],
+  },
+  {
+    id: 'sundubu-jjigae',
+    title: '순두부찌개',
+    description: '부드러운 순두부와 얼큰한 국물. 속이 확 풀리는 건강한 한 끼 식사입니다.',
+    category: '한식',
+    difficulty: '쉬움',
+    time: '20분',
+    emoji: '🥣',
+    tags: ['국물요리', '두부', '얼큰'],
+  },
+  {
+    id: 'gimbap',
+    title: '김밥',
+    description: '한 입에 쏙 들어가는 한국식 롤. 소풍과 나들이에 빠질 수 없는 도시락 메뉴입니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '40분',
+    emoji: '🍙',
+    tags: ['도시락', '김', '간편식'],
+  },
+  // 양식
+  {
     id: 'carbonara',
     title: '카르보나라',
     description: '크리미한 이탈리안 파스타의 정석. 베이컨과 달걀, 치즈의 풍미가 일품입니다.',
@@ -58,6 +110,47 @@ const popularRecipes = [
     tags: ['파스타', '이탈리안', '베이컨'],
   },
   {
+    id: 'tomato-pasta',
+    title: '토마토 파스타',
+    description: '새콤달콤한 토마토 소스와 쫄깃한 면발. 기본에 충실한 클래식 파스타입니다.',
+    category: '양식',
+    difficulty: '쉬움',
+    time: '25분',
+    emoji: '🍅',
+    tags: ['파스타', '토마토', '이탈리안'],
+  },
+  {
+    id: 'cream-pasta',
+    title: '크림 파스타',
+    description: '부드럽고 고소한 크림 소스. 아이들도 좋아하는 달콤한 파스타입니다.',
+    category: '양식',
+    difficulty: '쉬움',
+    time: '25분',
+    emoji: '🥛',
+    tags: ['파스타', '크림', '부드러움'],
+  },
+  {
+    id: 'steak',
+    title: '스테이크',
+    description: '겉바속촉 완벽한 굽기의 비프 스테이크. 특별한 날을 위한 고급 메인 요리입니다.',
+    category: '양식',
+    difficulty: '어려움',
+    time: '30분',
+    emoji: '🥩',
+    tags: ['소고기', '메인요리', '특별한날'],
+  },
+  {
+    id: 'omurice',
+    title: '오므라이스',
+    description: '부드러운 달걀에 감싸진 케첩 볶음밥. 아이 어른 모두가 좋아하는 메뉴입니다.',
+    category: '양식',
+    difficulty: '보통',
+    time: '25분',
+    emoji: '🍳',
+    tags: ['볶음밥', '달걀', '케첩'],
+  },
+  // 중식
+  {
     id: 'fried-rice',
     title: '볶음밥',
     description: '남은 재료로 뚝딱 만드는 한 그릇. 간단하지만 맛있는 한 끼 식사가 됩니다.',
@@ -67,13 +160,94 @@ const popularRecipes = [
     emoji: '🍚',
     tags: ['간편식', '볶음', '한그릇'],
   },
+  {
+    id: 'jjajangmyeon',
+    title: '짜장면',
+    description: '춘장의 깊은 맛이 배인 면요리. 배달음식 1위, 집에서 만드는 정통 짜장면입니다.',
+    category: '중식',
+    difficulty: '보통',
+    time: '35분',
+    emoji: '🍜',
+    tags: ['면요리', '춘장', '배달음식'],
+  },
+  {
+    id: 'jjamppong',
+    title: '짬뽕',
+    description: '얼큰한 해물 국물에 쫄깃한 면. 시원하게 땀 흘리며 먹는 중화 요리입니다.',
+    category: '중식',
+    difficulty: '보통',
+    time: '40분',
+    emoji: '🌶️',
+    tags: ['면요리', '해물', '얼큰'],
+  },
+  {
+    id: 'tangsuyuk',
+    title: '탕수육',
+    description: '바삭한 튀김옷과 새콤달콤 소스. 찍먹 vs 부먹 논쟁의 주인공입니다.',
+    category: '중식',
+    difficulty: '어려움',
+    time: '50분',
+    emoji: '🍖',
+    tags: ['튀김', '돼지고기', '파티음식'],
+  },
+  // 일식
+  {
+    id: 'katsudon',
+    title: '카츠동',
+    description: '바삭한 돈카츠와 부드러운 달걀. 일본식 덮밥의 대표 메뉴입니다.',
+    category: '일식',
+    difficulty: '보통',
+    time: '35분',
+    emoji: '🍱',
+    tags: ['덮밥', '돈카츠', '달걀'],
+  },
+  {
+    id: 'udon',
+    title: '우동',
+    description: '쫄깃한 면발과 깔끔한 국물. 추운 날 몸을 녹여주는 따뜻한 면 요리입니다.',
+    category: '일식',
+    difficulty: '쉬움',
+    time: '20분',
+    emoji: '🍜',
+    tags: ['면요리', '국물', '따뜻함'],
+  },
+  {
+    id: 'curry-rice',
+    title: '카레라이스',
+    description: '향신료 가득한 일본식 카레. 온 가족이 좋아하는 편안한 한 끼입니다.',
+    category: '일식',
+    difficulty: '쉬움',
+    time: '40분',
+    emoji: '🍛',
+    tags: ['카레', '밥요리', '가족식사'],
+  },
+  {
+    id: 'takoyaki',
+    title: '타코야키',
+    description: '동글동글 귀여운 문어빵. 겉바속촉 일본 길거리 간식의 대명사입니다.',
+    category: '일식',
+    difficulty: '보통',
+    time: '30분',
+    emoji: '🐙',
+    tags: ['간식', '문어', '길거리음식'],
+  },
+  {
+    id: 'gyudon',
+    title: '규동',
+    description: '달콤짭짤한 소고기 덮밥. 간단하지만 든든한 일본식 패스트푸드입니다.',
+    category: '일식',
+    difficulty: '쉬움',
+    time: '25분',
+    emoji: '🥩',
+    tags: ['덮밥', '소고기', '간편식'],
+  },
 ];
 
 const categories = [
-  { name: '한식', emoji: '🇰🇷', count: 45, color: 'var(--accent-100)' },
-  { name: '양식', emoji: '🍝', count: 28, color: 'var(--info-bg)' },
-  { name: '중식', emoji: '🥡', count: 22, color: 'var(--error-bg)' },
-  { name: '일식', emoji: '🍣', count: 18, color: 'var(--success-bg)' },
+  { name: '한식', emoji: '🇰🇷', count: 9, color: 'var(--accent-100)', slug: 'korean' },
+  { name: '양식', emoji: '🍝', count: 5, color: 'var(--info-bg)', slug: 'western' },
+  { name: '중식', emoji: '🥡', count: 4, color: 'var(--error-bg)', slug: 'chinese' },
+  { name: '일식', emoji: '🍣', count: 5, color: 'var(--success-bg)', slug: 'japanese' },
 ];
 
 const cookingTips = [
@@ -115,8 +289,9 @@ export default function RecipesPage() {
         <h2 className="section-title mb-4">카테고리별 레시피</h2>
         <div className="grid grid-cols-4 gap-3">
           {categories.map((cat) => (
-            <div
+            <Link
               key={cat.name}
+              href={`/recipes/category/${cat.slug}`}
               className="content-card p-4 text-center cursor-pointer hover:shadow-md transition-all"
             >
               <span className="text-2xl block mb-2">{cat.emoji}</span>
@@ -126,7 +301,7 @@ export default function RecipesPage() {
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 {cat.count}개
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -239,16 +414,20 @@ export default function RecipesPage() {
             초보자부터 숙련된 요리사까지, 누구나 쉽게 따라할 수 있는 레시피를 제공합니다.
           </p>
           <p className="mb-4">
-            <strong style={{ color: 'var(--text-secondary)' }}>한식</strong>: 김치찌개, 된장찌개, 불고기 등 전통 한국 요리의 정수를 담았습니다.
+            <strong style={{ color: 'var(--text-secondary)' }}>한식</strong>: 김치찌개, 된장찌개, 불고기, 비빔밥, 삼겹살, 떡볶이 등 전통 한국 요리의 정수를 담았습니다.
             정확한 계량과 조리 순서로 본연의 맛을 재현할 수 있습니다.
           </p>
           <p className="mb-4">
-            <strong style={{ color: 'var(--text-secondary)' }}>양식</strong>: 파스타, 스테이크, 샐러드 등 서양 요리를 가정에서도 쉽게 만들어보세요.
+            <strong style={{ color: 'var(--text-secondary)' }}>양식</strong>: 파스타, 스테이크, 오므라이스 등 서양 요리를 가정에서도 쉽게 만들어보세요.
             레스토랑 못지않은 맛을 경험하실 수 있습니다.
           </p>
-          <p>
-            <strong style={{ color: 'var(--text-secondary)' }}>중식</strong>: 볶음밥, 짜장면, 탕수육 등 중국 요리의 풍미를 집에서 즐겨보세요.
+          <p className="mb-4">
+            <strong style={{ color: 'var(--text-secondary)' }}>중식</strong>: 볶음밥, 짜장면, 짬뽕, 탕수육 등 중국 요리의 풍미를 집에서 즐겨보세요.
             간단한 재료로도 풍성한 한 끼를 만들 수 있습니다.
+          </p>
+          <p>
+            <strong style={{ color: 'var(--text-secondary)' }}>일식</strong>: 카츠동, 우동, 카레라이스, 타코야키, 규동 등 일본 요리를 집에서 즐겨보세요.
+            정갈하고 깔끔한 맛의 일식을 직접 만들어보실 수 있습니다.
           </p>
         </div>
       </section>

@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import ThemeProvider from "@/components/ThemeProvider";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "맛있는 기록 - AI 레시피 노트 | 음성 기록 & 사진 분석",
@@ -64,6 +65,7 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             {children}
+            <CookieConsent />
           </AuthProvider>
         </ThemeProvider>
       </body>
