@@ -70,13 +70,21 @@ export default function Home() {
     return (
       <div className="min-h-screen flex items-center justify-center grain" style={{ background: 'var(--bg-primary)' }}>
         <div className="text-center animate-fade-in">
-          <div className="relative">
-            <span className="text-7xl block animate-float drop-shadow-lg">🍳</span>
+          <div className="relative mb-4">
+            <span className="text-8xl block animate-float drop-shadow-lg">🍳</span>
             <div className="absolute inset-0 blur-3xl rounded-full" style={{ background: 'var(--accent-200)', opacity: 0.3 }} />
           </div>
-          <p className="mt-8 text-sm tracking-wide" style={{ color: 'var(--text-muted)' }}>
-            잠시만 기다려주세요...
+          <h1 className="font-handwriting text-3xl mb-1" style={{ color: 'var(--text-primary)' }}>
+            맛있는 기록
+          </h1>
+          <p className="text-xs tracking-widest uppercase mb-6" style={{ color: 'var(--text-muted)' }}>
+            AI Recipe Note
           </p>
+          <div className="flex items-center justify-center gap-1">
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--accent-400)', animationDelay: '0ms' }} />
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--accent-400)', animationDelay: '150ms' }} />
+            <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: 'var(--accent-400)', animationDelay: '300ms' }} />
+          </div>
         </div>
       </div>
     );
@@ -112,42 +120,39 @@ export default function Home() {
       <header className="sticky top-0 z-30 pt-safe">
         <div className="glass border-b" style={{ borderColor: 'var(--border-light)' }}>
           <div className="px-5 pt-5 pb-4">
-            {/* 상단 로고 & 컨트롤 */}
+            {/* 상단 헤더 - 3열 레이아웃 */}
             <div className="flex items-center justify-between mb-4 opacity-0 animate-fade-in-up">
-              <Link href="/" className="flex items-center gap-3 group">
-                <span className="text-4xl group-hover:scale-110 transition-transform duration-300 drop-shadow-md animate-bounce-subtle">
+              {/* 왼쪽: 테마 토글 */}
+              <div className="w-20 flex justify-start">
+                <ThemeToggle />
+              </div>
+
+              {/* 가운데: 로고 */}
+              <Link href="/" className="flex flex-col items-center group">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg animate-float mb-1">
                   🍳
                 </span>
-                <div>
-                  <h1 className="font-handwriting text-2xl tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                    맛있는 기록
-                  </h1>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>AI 레시피 노트</p>
-                </div>
+                <h1 className="font-handwriting text-2xl tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                  맛있는 기록
+                </h1>
+                <p className="text-[10px] tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>
+                  AI Recipe Note
+                </p>
               </Link>
 
-              <div className="flex items-center gap-2">
-                <ThemeToggle />
-
+              {/* 오른쪽: 로그인/로그아웃 */}
+              <div className="w-20 flex justify-end">
                 {user ? (
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="text-sm font-medium truncate max-w-[80px] hidden sm:block"
-                      style={{ color: 'var(--text-secondary)' }}
-                    >
-                      {user.email?.split('@')[0]}
-                    </span>
-                    <button
-                      onClick={signOut}
-                      className="btn-ghost text-xs"
-                    >
-                      로그아웃
-                    </button>
-                  </div>
+                  <button
+                    onClick={signOut}
+                    className="btn-ghost text-xs whitespace-nowrap"
+                  >
+                    로그아웃
+                  </button>
                 ) : (
                   <button
                     onClick={() => setShowAuthModal(true)}
-                    className="btn-primary text-sm py-2 px-4"
+                    className="btn-primary text-xs py-2 px-3 whitespace-nowrap"
                   >
                     로그인
                   </button>
