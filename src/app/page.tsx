@@ -63,25 +63,22 @@ export default function Home() {
         <div className="glass border-b border-warm-200/50">
           <div className="px-5 pt-5 pb-4">
             {/* 상단 로고 & 로그인 */}
-            <div className="flex items-center justify-between mb-4 opacity-0 animate-fade-in-up">
-              <Link href="/" className="flex items-center gap-2.5 group">
-                <span className="text-3xl group-hover:scale-110 transition-transform duration-300">🍳</span>
-                <h1 className="font-handwriting text-xl text-warm-800">
+            <div className="flex items-center justify-between mb-5 opacity-0 animate-fade-in-up">
+              <Link href="/" className="flex items-center gap-3 group">
+                <span className="text-4xl group-hover:scale-110 transition-transform duration-300 drop-shadow-sm">🍳</span>
+                <h1 className="font-handwriting text-2xl text-warm-800 tracking-tight">
                   맛있는 기록
                 </h1>
               </Link>
 
               {user ? (
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
-                    <p className="text-[11px] text-warm-400 mb-0.5">로그인됨</p>
-                    <p className="text-xs text-warm-600 truncate max-w-[100px] font-medium">
-                      {user.email?.split('@')[0]}
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-warm-600 font-medium truncate max-w-[80px]">
+                    {user.email?.split('@')[0]}
+                  </span>
                   <button
                     onClick={signOut}
-                    className="text-xs text-warm-500 hover:text-accent-600 px-3 py-1.5 rounded-lg hover:bg-warm-100 transition-all"
+                    className="text-xs text-warm-400 hover:text-accent-600 px-2.5 py-1.5 rounded-lg hover:bg-warm-100 transition-all"
                   >
                     로그아웃
                   </button>
@@ -89,23 +86,32 @@ export default function Home() {
               ) : (
                 <button
                   onClick={() => setShowAuthModal(true)}
-                  className="btn-primary text-sm px-5 py-2.5"
+                  className="text-sm font-medium text-white bg-gradient-to-r from-accent-500 to-accent-600 px-5 py-2.5 rounded-xl shadow-md shadow-accent-200 hover:shadow-lg hover:shadow-accent-300 transition-all"
                 >
-                  <span className="relative z-10">로그인</span>
+                  로그인
                 </button>
               )}
             </div>
 
             {/* 네비게이션 메뉴 */}
-            <nav className="flex gap-1 p-1 bg-warm-100/80 rounded-2xl opacity-0 animate-fade-in-up delay-1">
-              <Link href="/recipes" className="nav-pill flex-1 text-center">
-                <span>인기 레시피</span>
+            <nav className="flex gap-2 opacity-0 animate-fade-in-up delay-1">
+              <Link
+                href="/recipes"
+                className="flex-1 text-center py-2.5 px-3 bg-white/80 hover:bg-white text-warm-600 hover:text-accent-600 text-sm font-medium rounded-xl border border-warm-200/60 hover:border-accent-300 shadow-sm hover:shadow-md transition-all"
+              >
+                인기 레시피
               </Link>
-              <Link href="/guide" className="nav-pill flex-1 text-center">
-                <span>요리 가이드</span>
+              <Link
+                href="/guide"
+                className="flex-1 text-center py-2.5 px-3 bg-white/80 hover:bg-white text-warm-600 hover:text-accent-600 text-sm font-medium rounded-xl border border-warm-200/60 hover:border-accent-300 shadow-sm hover:shadow-md transition-all"
+              >
+                요리 가이드
               </Link>
-              <Link href="/tips" className="nav-pill flex-1 text-center">
-                <span>요리 팁</span>
+              <Link
+                href="/tips"
+                className="flex-1 text-center py-2.5 px-3 bg-white/80 hover:bg-white text-warm-600 hover:text-accent-600 text-sm font-medium rounded-xl border border-warm-200/60 hover:border-accent-300 shadow-sm hover:shadow-md transition-all"
+              >
+                요리 팁
               </Link>
             </nav>
           </div>
