@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://recipe-app-eta-blond-51.vercel.app/sitemap.xml

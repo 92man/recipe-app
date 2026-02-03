@@ -8,6 +8,7 @@ import RecipeList from '@/components/RecipeList';
 import RecipeSearch from '@/components/RecipeSearch';
 import TabNavigation from '@/components/TabNavigation';
 import AuthForm from '@/components/AuthForm';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const { activeTab } = useStore();
@@ -64,6 +65,9 @@ export default function Home() {
         {activeTab === 'search' && <RecipeSearch />}
         {activeTab === 'list' && <RecipeList />}
       </div>
+
+      {/* 푸터 */}
+      <Footer />
 
       {/* 하단 네비게이션 */}
       <TabNavigation />
