@@ -1,0 +1,22 @@
+{
+  "name": "맛있는 기록 - 음성 레시피 노트",
+  "short_name": "맛있는 기록",
+  "description": "음성으로 레시피를 기록하고, 사진으로 요리를 분석하세요",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfcfb",
+  "theme_color": "#fdfcfb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

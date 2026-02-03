@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Warm Kitchen Palette */
+  --warm-50: #fdfcfb;
+  --warm-100: #f7f3ef;
+  --warm-200: #ebe5de;
+  --warm-300: #d9cfc3;
+  --warm-400: #b5a896;
+  --warm-500: #968873;
+  --warm-600: #7d6f5c;
+  --warm-700: #5f5346;
+  --warm-800: #453d33;
+  --warm-900: #2d2822;
+
+  /* Accent colors */
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --red-500: #ef4444;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+
+  --background: var(--warm-50);
+  --foreground: var(--warm-800);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Warm colors */
+  --color-warm-50: var(--warm-50);
+  --color-warm-100: var(--warm-100);
+  --color-warm-200: var(--warm-200);
+  --color-warm-300: var(--warm-300);
+  --color-warm-400: var(--warm-400);
+  --color-warm-500: var(--warm-500);
+  --color-warm-600: var(--warm-600);
+  --color-warm-700: var(--warm-700);
+  --color-warm-800: var(--warm-800);
+  --color-warm-900: var(--warm-900);
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-handwriting: "Gowun Batang", serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #fdfcfb 0%, #f7f3ef 50%, #ebe5de 100%);
+  color: var(--foreground);
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Handwriting font class */
+.font-handwriting {
+  font-family: "Gowun Batang", serif;
+  font-weight: 400;
+}
+
+/* Recipe card with paper texture */
+.recipe-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(253, 251, 247, 0.9) 100%
+  );
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 6px -1px rgba(69, 61, 51, 0.08),
+    0 2px 4px -1px rgba(69, 61, 51, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(217, 207, 195, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Pulse animation for recording */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Safe area for mobile */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--warm-300);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--warm-400);
+}
+
+/* Input focus styles */
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Placeholder styles */
+::placeholder {
+  color: var(--warm-400);
+  opacity: 1;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(251, 146, 60, 0.3);
+}
