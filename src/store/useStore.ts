@@ -25,7 +25,7 @@ export const useStore = create<AppState>()(
     (set, get) => ({
       recipes: [],
       feedbackEntries: [],
-      activeTab: 'fridge',
+      activeTab: 'voice',
       theme: 'light',
 
       setActiveTab: (tab) => set({ activeTab: tab }),
