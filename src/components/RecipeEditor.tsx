@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useStore } from '@/store/useStore';
 import { v4 as uuidv4 } from 'uuid';
 import { AnalysisResult, Recipe, Ingredient, CookingStep, FeedbackEntry } from '@/types';
@@ -26,6 +26,9 @@ export default function RecipeEditor({
 
   const { addFeedback } = useStore();
 
+  const newIngredientRef = useRef<HTMLInputElement>(null);
+  const newStepRef = useRef<HTMLTextAreaElement>(null);
+
   const markChanged = () => {
     if (!hasChanges) setHasChanges(true);
   };
@@ -41,6 +44,11 @@ export default function RecipeEditor({
   const addIngredient = () => {
     setIngredients([...ingredients, { name: '', amount: '', unit: '' }]);
     markChanged();
+    // 새 입력폼으로 스크롤 및 포커스
+    setTimeout(() => {
+      newIngredientRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newIngredientRef.current?.focus();
+    }, 100);
   };
 
   const removeIngredient = (index: number) => {
@@ -59,6 +67,11 @@ export default function RecipeEditor({
   const addStep = () => {
     setSteps([...steps, { order: steps.length + 1, instruction: '' }]);
     markChanged();
+    // 새 입력폼으로 스크롤 및 포커스
+    setTimeout(() => {
+      newStepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newStepRef.current?.focus();
+    }, 100);
   };
 
   const removeStep = (index: number) => {
@@ -192,6 +205,7 @@ export default function RecipeEditor({
             <div key={index} className="flex items-center gap-2">
               <input
                 type="text"
+                ref={index === ingredients.length - 1 ? newIngredientRef : null}
                 value={ingredient.name}
                 onChange={(e) => updateIngredient(index, 'name', e.target.value)}
                 placeholder="재료명"
@@ -247,6 +261,7 @@ export default function RecipeEditor({
               </div>
               <div className="flex-1 space-y-2">
                 <textarea
+                  ref={index === steps.length - 1 ? newStepRef : null}
                   value={step.instruction}
                   onChange={(e) => updateStep(index, 'instruction', e.target.value)}
                   placeholder="조리 방법을 입력하세요"
