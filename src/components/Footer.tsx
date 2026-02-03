@@ -11,7 +11,20 @@ export default function Footer() {
           <span className="font-handwriting text-lg text-warm-700">맛있는 기록</span>
         </div>
 
-        <div className="flex justify-center gap-4 text-sm text-warm-600 mb-4">
+        <div className="flex flex-wrap justify-center gap-3 text-sm text-warm-600 mb-3">
+          <Link href="/recipes" className="hover:text-orange-600 transition-colors">
+            인기 레시피
+          </Link>
+          <span className="text-warm-300">|</span>
+          <Link href="/guide" className="hover:text-orange-600 transition-colors">
+            요리 가이드
+          </Link>
+          <span className="text-warm-300">|</span>
+          <Link href="/tips" className="hover:text-orange-600 transition-colors">
+            요리 팁
+          </Link>
+        </div>
+        <div className="flex justify-center gap-4 text-xs text-warm-500 mb-4">
           <Link href="/about" className="hover:text-orange-600 transition-colors">
             서비스 소개
           </Link>
