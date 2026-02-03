@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://recipe-app-eta-blond-51.vercel.app/sitemap.xml
+Sitemap: https://www.tasty-record.com/sitemap.xml
