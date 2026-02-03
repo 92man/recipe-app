@@ -51,13 +51,16 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        {/* Google AdSense */}
+        {/* Google AdSense - beforeInteractive로 빠르게 로드 */}
         <Script
+          id="adsense-script"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1907306190071217"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
+        {/* AdSense 메타 태그 (추가 확인용) */}
+        <meta name="google-adsense-account" content="ca-pub-1907306190071217" />
       </head>
       <body className="antialiased theme-transition">
         <ThemeProvider>
