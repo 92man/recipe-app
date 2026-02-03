@@ -1,19 +1,18 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
+import Groq from 'groq-sdk';
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.GOOGLE_AI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      console.error('GOOGLE_AI_API_KEY is not set');
+      console.error('GROQ_API_KEY is not set');
       return NextResponse.json(
-        { error: 'Google AI API 키가 설정되지 않았습니다.' },
+        { error: 'API 설정 오류입니다. 관리자에게 문의해주세요.' },
         { status: 500 }
       );
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    const groq = new Groq({ apiKey });
 
     const { dishName } = await request.json();
 
@@ -48,9 +47,19 @@ export async function POST(request: NextRequest) {
 - 한국어로 자연스럽게 작성
 - 만약 알 수 없는 요리라면 가장 유사한 요리를 추천`;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0.7,
+      max_tokens: 2048,
+    });
+
+    const text = completion.choices[0]?.message?.content || '';
 
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
@@ -67,7 +76,7 @@ export async function POST(request: NextRequest) {
     if (error instanceof Error) {
       if (error.message.includes('API_KEY') || error.message.includes('401')) {
         errorMessage = 'API 키가 유효하지 않습니다.';
-      } else if (error.message.includes('429') || error.message.includes('quota')) {
+      } else if (error.message.includes('429') || error.message.includes('quota') || error.message.includes('rate')) {
         errorMessage = 'API 요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.';
       }
     }

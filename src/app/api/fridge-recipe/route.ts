@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import Groq from 'groq-sdk';
 
 export async function POST(request: Request) {
   try {
-    const apiKey = process.env.GOOGLE_AI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
-      console.error('GOOGLE_AI_API_KEY is not set');
+      console.error('GROQ_API_KEY is not set');
       return NextResponse.json(
         { error: 'API 설정 오류입니다. 관리자에게 문의해주세요.' },
         { status: 500 }
@@ -22,8 +22,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    const groq = new Groq({ apiKey });
 
     const prompt = `당신은 한국 요리 전문가입니다. 사용자가 가진 재료로 만들 수 있는 레시피를 추천해주세요.
 
@@ -55,9 +54,19 @@ ${preference ? `사용자가 원하는 음식 종류/스타일: ${preference}` :
   ]
 }`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0.7,
+      max_tokens: 2048,
+    });
+
+    const text = completion.choices[0]?.message?.content || '';
 
     // JSON 파싱
     let jsonText = text;
@@ -85,10 +94,18 @@ ${preference ? `사용자가 원하는 음식 종류/스타일: ${preference}` :
     }
 
     // API key 관련 에러
-    if (errorMessage.includes('API key') || errorMessage.includes('API_KEY')) {
+    if (errorMessage.includes('API key') || errorMessage.includes('API_KEY') || errorMessage.includes('401')) {
       return NextResponse.json(
         { error: 'API 설정 오류입니다. 관리자에게 문의해주세요.' },
         { status: 500 }
+      );
+    }
+
+    // Rate limit 에러
+    if (errorMessage.includes('429') || errorMessage.includes('rate')) {
+      return NextResponse.json(
+        { error: 'API 요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.' },
+        { status: 429 }
       );
     }
 
