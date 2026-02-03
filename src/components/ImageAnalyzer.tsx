@@ -132,10 +132,7 @@ export default function ImageAnalyzer() {
     }
   };
 
-  const [isSaving, setIsSaving] = useState(false);
-
   const handleSaveRecipe = async (recipe: Recipe) => {
-    setIsSaving(true);
 
     let cloudinaryUrl: string | undefined;
 
@@ -164,7 +161,6 @@ export default function ImageAnalyzer() {
       imageUrl: cloudinaryUrl || selectedImage || undefined,
     });
 
-    setIsSaving(false);
     resetAll();
   };
 
