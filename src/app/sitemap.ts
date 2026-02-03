@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://recipe-app-eta-blond-51.vercel.app';
+  const baseUrl = 'https://tasty-record.com';
 
   // 모든 레시피 ID (한식, 양식, 중식, 일식)
   const recipes = [
