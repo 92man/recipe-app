@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { addRecipe as addRecipeToDB } from '@/lib/supabase/recipes';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useAuth } from '@/components/AuthProvider';
 
 interface RecipeRecommendation {
   name: string;
@@ -15,7 +15,7 @@ interface RecipeRecommendation {
 }
 
 export default function FridgeRecipe() {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [preference, setPreference] = useState('');
