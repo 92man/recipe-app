@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Pretendard:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Warm Kitchen Palette */
-  --warm-50: #fdfcfb;
-  --warm-100: #f7f3ef;
-  --warm-200: #ebe5de;
-  --warm-300: #d9cfc3;
-  --warm-400: #b5a896;
-  --warm-500: #968873;
-  --warm-600: #7d6f5c;
-  --warm-700: #5f5346;
-  --warm-800: #453d33;
-  --warm-900: #2d2822;
+  /* Refined Kitchen Palette - Earthy & Sophisticated */
+  --warm-50: #faf9f7;
+  --warm-100: #f5f3ef;
+  --warm-200: #e8e4dc;
+  --warm-300: #d4cdc0;
+  --warm-400: #a89f8f;
+  --warm-500: #7d7367;
+  --warm-600: #5c5347;
+  --warm-700: #433c32;
+  --warm-800: #2d2821;
+  --warm-900: #1a1714;
 
-  /* Accent colors */
-  --orange-400: #fb923c;
-  --orange-500: #f97316;
-  --orange-600: #ea580c;
-  --red-500: #ef4444;
-  --green-500: #22c55e;
-  --green-600: #16a34a;
+  /* Accent - Terracotta & Amber */
+  --accent-light: #fef3e7;
+  --accent-100: #fde4c8;
+  --accent-200: #f9c78e;
+  --accent-300: #f5a54a;
+  --accent-400: #e8852a;
+  --accent-500: #d4691a;
+  --accent-600: #b54d14;
+  --accent-700: #8a3a12;
+  --accent-800: #6b2e10;
+
+  /* Semantic */
+  --success: #4a9d6e;
+  --error: #c75a4a;
 
   --background: var(--warm-50);
   --foreground: var(--warm-800);
@@ -30,7 +37,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Warm colors */
   --color-warm-50: var(--warm-50);
   --color-warm-100: var(--warm-100);
   --color-warm-200: var(--warm-200);
@@ -42,8 +48,34 @@
   --color-warm-800: var(--warm-800);
   --color-warm-900: var(--warm-900);
 
-  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-handwriting: "Gowun Batang", serif;
+  --color-accent-light: var(--accent-light);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800);
+
+  /* Legacy orange mapping for compatibility */
+  --color-orange-50: var(--accent-light);
+  --color-orange-100: var(--accent-100);
+  --color-orange-400: var(--accent-400);
+  --color-orange-500: var(--accent-500);
+  --color-orange-600: var(--accent-600);
+  --color-orange-700: var(--accent-700);
+
+  --color-red-500: var(--error);
+  --color-green-500: var(--success);
+  --color-green-600: #3d8a5c;
+
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-handwriting: "Nanum Myeongjo", serif;
+
+  --shadow-soft: 0 2px 8px -2px rgba(45, 40, 33, 0.08), 0 4px 16px -4px rgba(45, 40, 33, 0.12);
+  --shadow-lifted: 0 8px 24px -8px rgba(45, 40, 33, 0.15), 0 16px 40px -12px rgba(45, 40, 33, 0.1);
+  --shadow-glow: 0 0 0 1px rgba(212, 105, 26, 0.1), 0 4px 16px -4px rgba(212, 105, 26, 0.2);
 }
 
 * {
@@ -55,34 +87,141 @@ html {
 }
 
 body {
-  background: linear-gradient(135deg, #fdfcfb 0%, #f7f3ef 50%, #ebe5de 100%);
+  background: var(--warm-50);
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(254, 243, 231, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(232, 228, 220, 0.4) 0%, transparent 50%);
   color: var(--foreground);
-  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   min-height: 100vh;
   min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Handwriting font class */
+/* Elegant serif for brand */
 .font-handwriting {
-  font-family: "Gowun Batang", serif;
-  font-weight: 400;
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-/* Recipe card with paper texture */
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* ========== GLASSMORPHISM ========== */
+
+.glass {
+  background: rgba(250, 249, 247, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ========== RECIPE CARD ========== */
+
 .recipe-card {
   background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(253, 251, 247, 0.9) 100%
+    165deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(250, 249, 247, 0.95) 100%
   );
-  border-radius: 1rem;
-  box-shadow:
-    0 4px 6px -1px rgba(69, 61, 51, 0.08),
-    0 2px 4px -1px rgba(69, 61, 51, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(217, 207, 195, 0.4);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(212, 205, 192, 0.3);
   position: relative;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .recipe-card::before {
@@ -92,37 +231,159 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
   pointer-events: none;
   mix-blend-mode: multiply;
 }
 
-/* Pulse animation for recording */
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
+.recipe-card:hover {
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-2px);
 }
 
-/* Safe area for mobile */
+/* ========== BUTTONS ========== */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
+  color: white;
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 8px -2px rgba(212, 105, 26, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--accent-400) 0%, var(--accent-500) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--warm-100);
+  color: var(--warm-700);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--warm-200);
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--warm-200);
+  border-color: var(--warm-300);
+}
+
+/* ========== INPUTS ========== */
+
+.input-field {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--warm-200);
+  border-radius: 0.875rem;
+  padding: 0.875rem 1rem;
+  transition: all 0.25s ease;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-400);
+  box-shadow: 0 0 0 3px rgba(212, 105, 26, 0.1);
+  background: white;
+}
+
+/* ========== NAVIGATION PILLS ========== */
+
+.nav-pill {
+  position: relative;
+  padding: 0.625rem 1rem;
+  border-radius: 0.625rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--warm-600);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.nav-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 8px -2px rgba(45, 40, 33, 0.1);
+}
+
+.nav-pill:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-pill:hover {
+  color: var(--accent-600);
+}
+
+.nav-pill span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== BADGE ========== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--error) 0%, #a34538 100%);
+  color: white;
+  box-shadow: 0 2px 4px -1px rgba(199, 90, 74, 0.4);
+}
+
+/* ========== SAFE AREAS ========== */
+
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
-/* Smooth transitions */
-.transition-all {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0);
 }
 
-/* Custom scrollbar */
+/* ========== SCROLLBAR ========== */
+
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -131,26 +392,58 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--warm-300);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--warm-400);
 }
 
-/* Input focus styles */
-input:focus,
-textarea:focus {
-  outline: none;
+/* ========== SELECTION ========== */
+
+::selection {
+  background-color: rgba(212, 105, 26, 0.2);
+  color: var(--warm-900);
 }
 
-/* Placeholder styles */
 ::placeholder {
   color: var(--warm-400);
   opacity: 1;
 }
 
-/* Selection color */
-::selection {
-  background-color: rgba(251, 146, 60, 0.3);
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* ========== UTILITIES ========== */
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-lifted {
+  box-shadow: var(--shadow-lifted);
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Grain overlay for texture */
+.grain::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  z-index: 9999;
 }
