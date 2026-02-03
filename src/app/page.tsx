@@ -141,18 +141,21 @@ export default function Home() {
               </Link>
 
               {/* 오른쪽: 로그인/로그아웃 */}
-              <div className="w-20 flex flex-col items-end">
+              <div className="w-20 flex flex-col items-end justify-center">
                 {user ? (
                   <>
                     <span
-                      className="text-[10px] font-medium truncate max-w-[80px] mb-0.5"
-                      style={{ color: 'var(--text-muted)' }}
+                      className="text-xs font-medium truncate max-w-[80px]"
+                      style={{ color: 'var(--text-secondary)' }}
                     >
                       {user.email?.split('@')[0]}
                     </span>
                     <button
                       onClick={signOut}
-                      className="btn-ghost text-xs whitespace-nowrap py-1 px-2"
+                      className="text-[10px] whitespace-nowrap mt-0.5 transition-colors"
+                      style={{ color: 'var(--text-muted)' }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-600)'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
                     >
                       로그아웃
                     </button>
@@ -172,21 +175,36 @@ export default function Home() {
             <nav className="grid grid-cols-3 gap-2 opacity-0 animate-fade-in-up delay-1">
               <Link
                 href="/recipes"
-                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
+                className="py-2.5 px-2 text-center rounded-xl transition-all border"
+                style={{
+                  background: 'var(--accent-50)',
+                  borderColor: 'var(--accent-200)',
+                  color: 'var(--accent-700)'
+                }}
               >
-                <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>인기 레시피</span>
+                <span className="text-sm font-medium">인기 레시피</span>
               </Link>
               <Link
                 href="/guide"
-                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
+                className="py-2.5 px-2 text-center rounded-xl transition-all border"
+                style={{
+                  background: 'var(--accent-50)',
+                  borderColor: 'var(--accent-200)',
+                  color: 'var(--accent-700)'
+                }}
               >
-                <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>요리 가이드</span>
+                <span className="text-sm font-medium">요리 가이드</span>
               </Link>
               <Link
                 href="/tips"
-                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
+                className="py-2.5 px-2 text-center rounded-xl transition-all border"
+                style={{
+                  background: 'var(--accent-50)',
+                  borderColor: 'var(--accent-200)',
+                  color: 'var(--accent-700)'
+                }}
               >
-                <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>요리 팁</span>
+                <span className="text-sm font-medium">요리 팁</span>
               </Link>
             </nav>
           </div>
