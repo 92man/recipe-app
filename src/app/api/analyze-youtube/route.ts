@@ -34,7 +34,7 @@ async function getVideoInfo(videoId: string): Promise<VideoInfo | null> {
     const html = await response.text();
 
     // ytInitialPlayerResponse에서 정보 추출
-    const playerMatch = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});/s);
+    const playerMatch = html.match(/ytInitialPlayerResponse\s*=\s*(\{[\s\S]+?\});/);
     if (!playerMatch) {
       return null;
     }
