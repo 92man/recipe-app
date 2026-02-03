@@ -23,6 +23,7 @@ export default function RecipeEditor({
   const [ingredients, setIngredients] = useState<Ingredient[]>(initialData.ingredients);
   const [steps, setSteps] = useState<CookingStep[]>(initialData.steps);
   const [hasChanges, setHasChanges] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const { addFeedback } = useStore();
 
@@ -83,51 +84,59 @@ export default function RecipeEditor({
     markChanged();
   };
 
-  const handleSave = () => {
-    // 수정이 있으면 피드백으로 저장 (로컬 + 서버)
-    if (hasChanges) {
-      const feedback: FeedbackEntry = {
+  const handleSave = async () => {
+    if (isSaving) return; // 중복 클릭 방지
+    setIsSaving(true);
+
+    try {
+      // 수정이 있으면 피드백으로 저장 (로컬 + 서버)
+      if (hasChanges) {
+        const feedback: FeedbackEntry = {
+          id: uuidv4(),
+          recipeId: '', // 나중에 업데이트
+          title: title, // 음식 이름 저장
+          originalData: {
+            title: initialData.title,
+            ingredients: initialData.ingredients,
+            steps: initialData.steps,
+          },
+          correctedData: {
+            title: title,
+            ingredients,
+            steps,
+          },
+          context: originalContext,
+          source: originalContext.includes('이미지') ? 'image' : 'voice',
+          createdAt: new Date().toISOString(),
+        };
+
+        // 로컬 저장
+        addFeedback(feedback);
+
+        // 서버 저장 (비동기, 실패해도 계속 진행)
+        fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(feedback),
+        }).catch(() => {});
+      }
+
+      const recipe: Recipe = {
         id: uuidv4(),
-        recipeId: '', // 나중에 업데이트
-        title: title, // 음식 이름 저장
-        originalData: {
-          title: initialData.title,
-          ingredients: initialData.ingredients,
-          steps: initialData.steps,
-        },
-        correctedData: {
-          title: title,
-          ingredients,
-          steps,
-        },
-        context: originalContext,
-        source: originalContext.includes('이미지') ? 'image' : 'voice',
+        title,
+        description,
+        ingredients: ingredients.filter((i) => i.name.trim()),
+        steps: steps.filter((s) => s.instruction.trim()),
         createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        source: 'manual',
       };
 
-      // 로컬 저장
-      addFeedback(feedback);
-
-      // 서버 저장 (비동기, 실패해도 계속 진행)
-      fetch('/api/feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedback),
-      }).catch(() => {});
+      await onSave(recipe);
+    } catch (error) {
+      console.error('저장 실패:', error);
+      setIsSaving(false);
     }
-
-    const recipe: Recipe = {
-      id: uuidv4(),
-      title,
-      description,
-      ingredients: ingredients.filter((i) => i.name.trim()),
-      steps: steps.filter((s) => s.instruction.trim()),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      source: 'manual',
-    };
-
-    onSave(recipe);
   };
 
   return (
@@ -302,18 +311,32 @@ export default function RecipeEditor({
       <div className="flex gap-3">
         <button
           onClick={onCancel}
-          className="flex-1 py-4 border-2 border-warm-300 text-warm-700 rounded-2xl font-medium hover:bg-warm-50 transition-all"
+          disabled={isSaving}
+          className="flex-1 py-4 border-2 border-warm-300 text-warm-700 rounded-2xl font-medium hover:bg-warm-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           취소
         </button>
         <button
           onClick={handleSave}
-          className="flex-1 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-medium shadow-lg shadow-orange-200 hover:shadow-xl hover:shadow-orange-300 transition-all flex items-center justify-center gap-2"
+          disabled={isSaving}
+          className="flex-1 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl font-medium shadow-lg shadow-orange-200 hover:shadow-xl hover:shadow-orange-300 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          저장하기
+          {isSaving ? (
+            <>
+              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              저장 중...
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              저장하기
+            </>
+          )}
         </button>
       </div>
     </div>
