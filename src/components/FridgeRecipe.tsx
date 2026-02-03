@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { addRecipe as addRecipeToDB } from '@/lib/supabase/recipes';
+import { useAuthStore } from '@/store/useAuthStore';
 
 interface RecipeRecommendation {
   name: string;
@@ -13,6 +15,7 @@ interface RecipeRecommendation {
 }
 
 export default function FridgeRecipe() {
+  const { user } = useAuthStore();
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [preference, setPreference] = useState('');
@@ -20,6 +23,15 @@ export default function FridgeRecipe() {
   const [recommendations, setRecommendations] = useState<RecipeRecommendation[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [selectedRecipe, setSelectedRecipe] = useState<RecipeRecommendation | null>(null);
+
+  // 수정 모드 상태
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedName, setEditedName] = useState('');
+  const [editedDescription, setEditedDescription] = useState('');
+  const [editedIngredients, setEditedIngredients] = useState<string[]>([]);
+  const [editedSteps, setEditedSteps] = useState<string[]>([]);
+  const [newIngredient, setNewIngredient] = useState('');
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const addIngredient = () => {
     const trimmed = inputValue.trim();
@@ -84,12 +96,109 @@ export default function FridgeRecipe() {
     }
   };
 
+  // 수정 모드 시작
+  const startEditing = () => {
+    if (selectedRecipe) {
+      setEditedName(selectedRecipe.name);
+      setEditedDescription(selectedRecipe.description);
+      setEditedIngredients([...selectedRecipe.matchedIngredients, ...selectedRecipe.missingIngredients]);
+      setEditedSteps([...selectedRecipe.steps]);
+      setIsEditing(true);
+      setSaveMessage(null);
+    }
+  };
+
+  // 수정 취소
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setSaveMessage(null);
+  };
+
+  // 재료 추가
+  const addEditIngredient = () => {
+    const trimmed = newIngredient.trim();
+    if (trimmed && !editedIngredients.includes(trimmed)) {
+      setEditedIngredients([...editedIngredients, trimmed]);
+      setNewIngredient('');
+    }
+  };
+
+  // 재료 삭제
+  const removeEditIngredient = (ing: string) => {
+    setEditedIngredients(editedIngredients.filter(i => i !== ing));
+  };
+
+  // 단계 수정
+  const updateStep = (idx: number, value: string) => {
+    const newSteps = [...editedSteps];
+    newSteps[idx] = value;
+    setEditedSteps(newSteps);
+  };
+
+  // 단계 추가
+  const addStep = () => {
+    setEditedSteps([...editedSteps, '']);
+  };
+
+  // 단계 삭제
+  const removeStep = (idx: number) => {
+    setEditedSteps(editedSteps.filter((_, i) => i !== idx));
+  };
+
+  // 레시피 저장
+  const saveRecipe = async () => {
+    if (!user) {
+      setError('레시피를 저장하려면 로그인이 필요합니다.');
+      return;
+    }
+
+    if (!selectedRecipe) return;
+
+    try {
+      // 수정 모드면 수정된 값 사용, 아니면 원본 사용
+      const name = isEditing ? editedName : selectedRecipe.name;
+      const description = isEditing ? editedDescription : selectedRecipe.description;
+      const ingredientsList = isEditing
+        ? editedIngredients
+        : [...selectedRecipe.matchedIngredients, ...selectedRecipe.missingIngredients];
+      const stepsList = isEditing ? editedSteps : selectedRecipe.steps;
+
+      const ingredientObjects = ingredientsList.map(ing => ({
+        name: ing,
+        amount: '',
+        unit: ''
+      }));
+
+      const stepObjects = stepsList.map((instruction, idx) => ({
+        order: idx + 1,
+        instruction,
+        duration: '',
+        tip: ''
+      }));
+
+      await addRecipeToDB({
+        title: name,
+        description: description,
+        ingredients: ingredientObjects,
+        steps: stepObjects,
+        source: 'manual',
+      });
+
+      setSaveMessage('레시피가 저장되었습니다!');
+      setIsEditing(false);
+      setError(null);
+    } catch (err) {
+      console.error('Save error:', err);
+      setError('레시피 저장 중 오류가 발생했습니다.');
+    }
+  };
+
   // 상세 레시피 보기
   if (selectedRecipe) {
     return (
       <div className="p-5 pb-28">
         <button
-          onClick={() => setSelectedRecipe(null)}
+          onClick={() => { setSelectedRecipe(null); setIsEditing(false); setSaveMessage(null); }}
           className="flex items-center gap-2 mb-4 text-sm font-medium transition-colors"
           style={{ color: 'var(--accent-600)' }}
         >
@@ -99,13 +208,54 @@ export default function FridgeRecipe() {
           목록으로
         </button>
 
+        {/* 저장 성공 메시지 */}
+        {saveMessage && (
+          <div
+            className="p-3 rounded-xl mb-4 text-sm"
+            style={{ background: 'var(--success-bg)', color: 'var(--success-text)' }}
+          >
+            {saveMessage}
+          </div>
+        )}
+
+        {/* 에러 메시지 */}
+        {error && (
+          <div
+            className="p-3 rounded-xl mb-4 text-sm"
+            style={{ background: 'var(--error-bg)', color: 'var(--error-text)' }}
+          >
+            {error}
+          </div>
+        )}
+
         <div className="recipe-card p-5 mb-4">
-          <h2 className="font-handwriting text-2xl mb-2" style={{ color: 'var(--text-primary)' }}>
-            {selectedRecipe.name}
-          </h2>
-          <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>
-            {selectedRecipe.description}
-          </p>
+          {isEditing ? (
+            <>
+              <input
+                type="text"
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
+                className="input-field w-full text-xl font-medium mb-3"
+                placeholder="요리 이름"
+              />
+              <textarea
+                value={editedDescription}
+                onChange={(e) => setEditedDescription(e.target.value)}
+                className="input-field w-full text-sm mb-4"
+                rows={2}
+                placeholder="요리 설명"
+              />
+            </>
+          ) : (
+            <>
+              <h2 className="font-handwriting text-2xl mb-2" style={{ color: 'var(--text-primary)' }}>
+                {selectedRecipe.name}
+              </h2>
+              <p className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>
+                {selectedRecipe.description}
+              </p>
+            </>
+          )}
 
           <div className="flex gap-3 mb-4">
             <span className="badge-subtle">{selectedRecipe.difficulty}</span>
@@ -113,66 +263,179 @@ export default function FridgeRecipe() {
           </div>
 
           {/* 재료 정보 */}
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <div className="content-card p-3">
+          {isEditing ? (
+            <div className="content-card p-3 mb-4">
               <h4 className="text-xs font-medium mb-2" style={{ color: 'var(--text-muted)' }}>
-                보유 재료
+                재료 (수정 중)
               </h4>
-              <div className="flex flex-wrap gap-1">
-                {selectedRecipe.matchedIngredients.map((ing, idx) => (
+              <div className="flex flex-wrap gap-1 mb-3">
+                {editedIngredients.map((ing, idx) => (
                   <span
                     key={idx}
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{ background: 'var(--success-bg)', color: 'var(--success-text)' }}
+                    className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full"
+                    style={{ background: 'var(--accent-100)', color: 'var(--accent-700)' }}
                   >
                     {ing}
+                    <button
+                      onClick={() => removeEditIngredient(ing)}
+                      className="w-3 h-3 rounded-full flex items-center justify-center hover:bg-white/50"
+                    >
+                      ×
+                    </button>
                   </span>
                 ))}
               </div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={newIngredient}
+                  onChange={(e) => setNewIngredient(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addEditIngredient())}
+                  className="input-field flex-1 text-sm"
+                  placeholder="재료 추가"
+                />
+                <button onClick={addEditIngredient} className="btn-secondary px-3 text-sm">
+                  추가
+                </button>
+              </div>
             </div>
-            <div className="content-card p-3">
-              <h4 className="text-xs font-medium mb-2" style={{ color: 'var(--text-muted)' }}>
-                필요 재료
-              </h4>
-              <div className="flex flex-wrap gap-1">
-                {selectedRecipe.missingIngredients.length > 0 ? (
-                  selectedRecipe.missingIngredients.map((ing, idx) => (
+          ) : (
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              <div className="content-card p-3">
+                <h4 className="text-xs font-medium mb-2" style={{ color: 'var(--text-muted)' }}>
+                  보유 재료
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {selectedRecipe.matchedIngredients.map((ing, idx) => (
                     <span
                       key={idx}
                       className="text-xs px-2 py-1 rounded-full"
-                      style={{ background: 'var(--error-bg)', color: 'var(--error-text)' }}
+                      style={{ background: 'var(--success-bg)', color: 'var(--success-text)' }}
                     >
                       {ing}
                     </span>
-                  ))
-                ) : (
-                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>없음</span>
-                )}
+                  ))}
+                </div>
+              </div>
+              <div className="content-card p-3">
+                <h4 className="text-xs font-medium mb-2" style={{ color: 'var(--text-muted)' }}>
+                  필요 재료
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {selectedRecipe.missingIngredients.length > 0 ? (
+                    selectedRecipe.missingIngredients.map((ing, idx) => (
+                      <span
+                        key={idx}
+                        className="text-xs px-2 py-1 rounded-full"
+                        style={{ background: 'var(--error-bg)', color: 'var(--error-text)' }}
+                      >
+                        {ing}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs" style={{ color: 'var(--text-muted)' }}>없음</span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 조리 순서 */}
-        <div className="recipe-card p-5">
+        <div className="recipe-card p-5 mb-4">
           <h3 className="font-medium mb-4" style={{ color: 'var(--text-primary)' }}>
             조리 순서
           </h3>
           <div className="space-y-4">
-            {selectedRecipe.steps.map((step, idx) => (
-              <div key={idx} className="flex gap-3">
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold"
-                  style={{ background: 'var(--accent-100)', color: 'var(--accent-700)' }}
+            {isEditing ? (
+              <>
+                {editedSteps.map((step, idx) => (
+                  <div key={idx} className="flex gap-2 items-start">
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold"
+                      style={{ background: 'var(--accent-100)', color: 'var(--accent-700)' }}
+                    >
+                      {idx + 1}
+                    </div>
+                    <textarea
+                      value={step}
+                      onChange={(e) => updateStep(idx, e.target.value)}
+                      className="input-field flex-1 text-sm"
+                      rows={2}
+                    />
+                    <button
+                      onClick={() => removeStep(idx)}
+                      className="text-red-500 hover:text-red-700 p-1"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+                <button
+                  onClick={addStep}
+                  className="w-full py-2 border-2 border-dashed rounded-xl text-sm transition-colors"
+                  style={{ borderColor: 'var(--border-light)', color: 'var(--text-muted)' }}
                 >
-                  {idx + 1}
+                  + 단계 추가
+                </button>
+              </>
+            ) : (
+              selectedRecipe.steps.map((step, idx) => (
+                <div key={idx} className="flex gap-3">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold"
+                    style={{ background: 'var(--accent-100)', color: 'var(--accent-700)' }}
+                  >
+                    {idx + 1}
+                  </div>
+                  <p className="text-sm pt-1" style={{ color: 'var(--text-secondary)' }}>
+                    {step}
+                  </p>
                 </div>
-                <p className="text-sm pt-1" style={{ color: 'var(--text-secondary)' }}>
-                  {step}
-                </p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
+        </div>
+
+        {/* 수정/저장 버튼 */}
+        <div className="flex gap-3">
+          {isEditing ? (
+            <>
+              <button
+                onClick={cancelEditing}
+                className="flex-1 py-3 rounded-xl font-medium border transition-colors"
+                style={{ borderColor: 'var(--border-default)', color: 'var(--text-secondary)' }}
+              >
+                취소
+              </button>
+              <button
+                onClick={saveRecipe}
+                className="flex-1 py-3 rounded-xl font-medium text-white transition-colors"
+                style={{ background: 'var(--gradient-accent)' }}
+              >
+                저장하기
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={startEditing}
+                className="flex-1 py-3 rounded-xl font-medium border transition-colors"
+                style={{ borderColor: 'var(--accent-500)', color: 'var(--accent-600)' }}
+              >
+                수정하기
+              </button>
+              <button
+                onClick={saveRecipe}
+                className="flex-1 py-3 rounded-xl font-medium text-white transition-colors"
+                style={{ background: 'var(--gradient-accent)' }}
+              >
+                바로 저장
+              </button>
+            </>
+          )}
         </div>
       </div>
     );
