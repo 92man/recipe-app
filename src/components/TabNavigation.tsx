@@ -48,7 +48,10 @@ export default function TabNavigation() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 safe-area-bottom">
       <div className="max-w-md mx-auto px-4 pb-2">
-        <div className="glass rounded-2xl border border-warm-200/50 shadow-lifted">
+        <div
+          className="glass rounded-2xl shadow-lifted"
+          style={{ borderColor: 'var(--border-light)' }}
+        >
           <div className="flex justify-around py-2">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
@@ -56,15 +59,17 @@ export default function TabNavigation() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex flex-col items-center py-2 px-5 rounded-xl transition-all duration-300 ${
-                    isActive
-                      ? 'text-accent-600'
-                      : 'text-warm-400 hover:text-warm-600'
-                  }`}
+                  className="relative flex flex-col items-center py-2 px-5 rounded-xl transition-all duration-300"
+                  style={{
+                    color: isActive ? 'var(--accent-600)' : 'var(--text-muted)',
+                  }}
                 >
                   {/* 활성 배경 */}
                   {isActive && (
-                    <span className="absolute inset-0 bg-accent-100/60 rounded-xl" />
+                    <span
+                      className="absolute inset-0 rounded-xl transition-all duration-300"
+                      style={{ background: 'var(--accent-100)', opacity: 0.7 }}
+                    />
                   )}
 
                   {/* 아이콘 */}
@@ -73,9 +78,12 @@ export default function TabNavigation() {
                   </span>
 
                   {/* 라벨 */}
-                  <span className={`relative text-[10px] mt-1 font-medium tracking-tight ${
-                    isActive ? 'text-accent-700' : ''
-                  }`}>
+                  <span
+                    className="relative text-[10px] mt-1 font-medium tracking-tight"
+                    style={{
+                      color: isActive ? 'var(--accent-700)' : 'inherit',
+                    }}
+                  >
                     {tab.label}
                   </span>
 
