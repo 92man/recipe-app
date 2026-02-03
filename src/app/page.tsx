@@ -141,14 +141,22 @@ export default function Home() {
               </Link>
 
               {/* 오른쪽: 로그인/로그아웃 */}
-              <div className="w-20 flex justify-end">
+              <div className="w-20 flex flex-col items-end">
                 {user ? (
-                  <button
-                    onClick={signOut}
-                    className="btn-ghost text-xs whitespace-nowrap"
-                  >
-                    로그아웃
-                  </button>
+                  <>
+                    <span
+                      className="text-[10px] font-medium truncate max-w-[80px] mb-0.5"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {user.email?.split('@')[0]}
+                    </span>
+                    <button
+                      onClick={signOut}
+                      className="btn-ghost text-xs whitespace-nowrap py-1 px-2"
+                    >
+                      로그아웃
+                    </button>
+                  </>
                 ) : (
                   <button
                     onClick={() => setShowAuthModal(true)}
@@ -161,26 +169,23 @@ export default function Home() {
             </div>
 
             {/* 네비게이션 메뉴 */}
-            <nav className="flex gap-2 opacity-0 animate-fade-in-up delay-1 overflow-x-auto horizontal-scroll">
+            <nav className="grid grid-cols-3 gap-2 opacity-0 animate-fade-in-up delay-1">
               <Link
                 href="/recipes"
-                className="content-card flex items-center gap-2 py-2.5 px-4 hover:shadow-md transition-all whitespace-nowrap"
+                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
               >
-                <span className="text-lg">🍲</span>
                 <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>인기 레시피</span>
               </Link>
               <Link
                 href="/guide"
-                className="content-card flex items-center gap-2 py-2.5 px-4 hover:shadow-md transition-all whitespace-nowrap"
+                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
               >
-                <span className="text-lg">📚</span>
                 <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>요리 가이드</span>
               </Link>
               <Link
                 href="/tips"
-                className="content-card flex items-center gap-2 py-2.5 px-4 hover:shadow-md transition-all whitespace-nowrap"
+                className="content-card py-2.5 px-2 text-center hover:shadow-md transition-all"
               >
-                <span className="text-lg">💡</span>
                 <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>요리 팁</span>
               </Link>
             </nav>
