@@ -20,7 +20,7 @@ export interface Recipe {
   imageUrl?: string;
   createdAt: string;
   updatedAt: string;
-  source: 'voice' | 'image' | 'manual';
+  source: 'voice' | 'image' | 'manual' | 'youtube';
   originalTranscript?: string;
 }
 
@@ -39,7 +39,7 @@ export interface FeedbackEntry {
     steps?: CookingStep[];
   };
   context: string; // 원본 텍스트나 이미지 설명
-  source: 'voice' | 'image'; // 입력 소스
+  source: 'voice' | 'image' | 'youtube'; // 입력 소스
   createdAt: string;
 }
 
