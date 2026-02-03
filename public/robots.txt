@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.tasty-record.com/sitemap.xml
+Sitemap: https://tasty-record.com/sitemap.xml
