@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `당신은 한국 요리 전문가입니다. 사용자가 가진 재료로 만들 수 있는 레시피를 추천해주세요.
 
@@ -66,6 +66,8 @@ ${preference ? `사용자가 원하는 음식 종류/스타일: ${preference}` :
   } catch (error) {
     console.error('Fridge recipe error:', error);
 
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
     if (error instanceof SyntaxError) {
       return NextResponse.json(
         { error: 'AI 응답을 처리하는 중 오류가 발생했습니다. 다시 시도해주세요.' },
@@ -73,8 +75,16 @@ ${preference ? `사용자가 원하는 음식 종류/스타일: ${preference}` :
       );
     }
 
+    // API key 관련 에러
+    if (errorMessage.includes('API key') || errorMessage.includes('API_KEY')) {
+      return NextResponse.json(
+        { error: 'API 설정 오류입니다. 관리자에게 문의해주세요.' },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { error: '레시피 추천 중 오류가 발생했습니다.' },
+      { error: `레시피 추천 중 오류가 발생했습니다: ${errorMessage}` },
       { status: 500 }
     );
   }
