@@ -1,6 +1,5 @@
-const CACHE_NAME = 'tasty-record-v1';
+const CACHE_NAME = 'tasty-record-v2';
 const urlsToCache = [
-  '/',
   '/icon-192.png',
   '/icon-512.png',
 ];

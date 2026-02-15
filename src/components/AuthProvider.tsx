@@ -24,8 +24,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        setUser(user);
+        const result = await Promise.race([
+          supabase.auth.getUser(),
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), 3000)),
+        ]);
+        if (result && 'data' in result) {
+          setUser(result.data.user);
+        } else {
+          setUser(null);
+        }
       } catch {
         setUser(null);
       } finally {
