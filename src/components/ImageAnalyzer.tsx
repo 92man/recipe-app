@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { useStore } from '@/store/useStore';
 import RecipeEditor from './RecipeEditor';
 import { AnalysisResult, Recipe, FeedbackEntry } from '@/types';
-import Image from 'next/image';
 import { addRecipe as addRecipeToDB } from '@/lib/supabase/recipes';
 
 export default function ImageAnalyzer() {
@@ -182,11 +181,9 @@ export default function ImageAnalyzer() {
       <div className="p-4">
         {selectedImage && (
           <div className="mb-4 rounded-2xl overflow-hidden shadow-md">
-            <Image
+            <img
               src={selectedImage}
               alt="분석된 음식"
-              width={400}
-              height={300}
               className="w-full h-48 object-cover"
             />
           </div>
@@ -194,6 +191,7 @@ export default function ImageAnalyzer() {
         <RecipeEditor
           initialData={analysisResult}
           originalContext={`이미지 분석 - ${analysisResult.title}`}
+          source="image"
           onSave={handleSaveRecipe}
           onCancel={() => setAnalysisResult(null)}
         />
@@ -224,11 +222,9 @@ export default function ImageAnalyzer() {
       {selectedImage ? (
         <div className="recipe-card p-4 mb-6">
           <div className="relative">
-            <Image
+            <img
               src={selectedImage}
               alt="선택된 이미지"
-              width={400}
-              height={300}
               className="w-full h-64 object-cover rounded-xl"
             />
             <button
@@ -274,7 +270,7 @@ export default function ImageAnalyzer() {
 
       {/* 에러 메시지 */}
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+        <div className="mb-4 p-4 rounded-xl text-sm" style={{ background: 'var(--error-bg)', border: '1px solid var(--error-border)', color: 'var(--error-text)' }}>
           {error}
         </div>
       )}

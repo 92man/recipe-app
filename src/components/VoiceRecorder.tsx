@@ -257,6 +257,7 @@ export default function VoiceRecorder() {
         <RecipeEditor
           initialData={analysisResult}
           originalContext={transcript}
+          source="voice"
           onSave={handleSaveRecipe}
           onCancel={() => setAnalysisResult(null)}
         />
@@ -315,7 +316,7 @@ export default function VoiceRecorder() {
       </div>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+        <div className="mb-4 p-4 rounded-xl text-sm" style={{ background: 'var(--error-bg)', borderColor: 'var(--error-border)', color: 'var(--error-text)', border: '1px solid var(--error-border)' }}>
           {error}
         </div>
       )}
@@ -357,7 +358,8 @@ export default function VoiceRecorder() {
           onChange={(e) => setManualNote(e.target.value)}
           placeholder="재료나 조리법을 직접 입력하세요... (선택사항)"
           rows={3}
-          className="w-full px-4 py-3 border border-warm-200 rounded-xl focus:ring-2 focus:ring-orange-300 focus:border-orange-400 outline-none transition-all text-warm-700 resize-none bg-white/50"
+          className="w-full px-4 py-3 rounded-xl outline-none transition-all resize-none border"
+          style={{ background: 'var(--bg-card)', borderColor: 'var(--border-medium)', color: 'var(--text-secondary)' }}
         />
       </div>
 

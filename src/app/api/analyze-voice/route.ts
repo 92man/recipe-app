@@ -1,11 +1,15 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
 import { FeedbackEntry } from '@/types';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth';
 
 const anthropic = new Anthropic();
 
 export async function POST(request: NextRequest) {
   try {
+    const user = await getAuthUser();
+    if (!user) return unauthorizedResponse();
+
     const { transcript, feedbackHistory } = await request.json();
 
     if (!transcript) {

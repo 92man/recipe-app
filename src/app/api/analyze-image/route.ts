@@ -1,9 +1,13 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { FeedbackEntry } from '@/types';
+import { getAuthUser, unauthorizedResponse } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
+    const user = await getAuthUser();
+    if (!user) return unauthorizedResponse();
+
     // API 키 확인
     const apiKey = process.env.GOOGLE_AI_API_KEY;
     if (!apiKey) {

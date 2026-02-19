@@ -8,6 +8,7 @@ import { AnalysisResult, Recipe, Ingredient, CookingStep, FeedbackEntry } from '
 interface RecipeEditorProps {
   initialData: AnalysisResult;
   originalContext: string;
+  source?: Recipe['source'];
   onSave: (recipe: Recipe) => void;
   onCancel: () => void;
 }
@@ -15,6 +16,7 @@ interface RecipeEditorProps {
 export default function RecipeEditor({
   initialData,
   originalContext,
+  source = 'manual',
   onSave,
   onCancel,
 }: RecipeEditorProps) {
@@ -129,7 +131,7 @@ export default function RecipeEditor({
         steps: steps.filter((s) => s.instruction.trim()),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        source: 'manual',
+        source,
       };
 
       await onSave(recipe);
@@ -156,7 +158,7 @@ export default function RecipeEditor({
       </div>
 
       {hasChanges && (
-        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-700 text-sm flex items-center gap-2">
+        <div className="mb-4 p-3 rounded-xl text-sm flex items-center gap-2" style={{ background: 'var(--info-bg)', border: '1px solid var(--info-border)', color: 'var(--info-text)' }}>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>

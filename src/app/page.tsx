@@ -20,6 +20,8 @@ const featuredRecipes = [
   { id: 'bulgogi', title: '불고기', emoji: '🥩', time: '40분', category: '한식' },
   { id: 'carbonara', title: '카르보나라', emoji: '🍝', time: '25분', category: '양식' },
   { id: 'fried-rice', title: '볶음밥', emoji: '🍚', time: '15분', category: '중식' },
+  { id: 'gambas', title: '감바스', emoji: '🦐', time: '15분', category: '양식' },
+  { id: 'ramen', title: '라멘', emoji: '🍜', time: '30분', category: '일식' },
 ];
 
 // 요리 팁 데이터

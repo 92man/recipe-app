@@ -79,13 +79,14 @@ export default function RecipeList() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-          <h3 className="text-lg font-medium text-warm-800 mb-2">레시피 삭제</h3>
-          <p className="text-warm-600 mb-6">이 레시피를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</p>
+        <div className="rounded-2xl p-6 max-w-sm w-full" style={{ background: 'var(--bg-elevated)', boxShadow: 'var(--shadow-xl)' }}>
+          <h3 className="text-lg font-medium mb-2" style={{ color: 'var(--text-primary)' }}>레시피 삭제</h3>
+          <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>이 레시피를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</p>
           <div className="flex gap-3">
             <button
               onClick={() => setShowDeleteConfirm(null)}
-              className="flex-1 py-3 border border-warm-300 rounded-xl text-warm-700 hover:bg-warm-50 transition-colors"
+              className="flex-1 py-3 rounded-xl transition-colors border"
+              style={{ borderColor: 'var(--border-medium)', color: 'var(--text-secondary)' }}
             >
               취소
             </button>
@@ -108,7 +109,8 @@ export default function RecipeList() {
           {/* 뒤로가기 */}
           <button
             onClick={() => setSelectedRecipe(null)}
-            className="mb-4 flex items-center gap-2 text-warm-600 hover:text-warm-800 transition-colors"
+            className="mb-4 flex items-center gap-2 transition-colors"
+            style={{ color: 'var(--text-muted)' }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -131,27 +133,27 @@ export default function RecipeList() {
             )}
 
             <div className="flex items-start justify-between mb-2">
-              <h1 className="font-handwriting text-3xl text-warm-800">{selectedRecipe.title}</h1>
-              <span className="px-3 py-1 bg-warm-100 rounded-full text-sm text-warm-600 flex items-center gap-1">
+              <h1 className="font-handwriting text-3xl" style={{ color: 'var(--text-primary)' }}>{selectedRecipe.title}</h1>
+              <span className="px-3 py-1 rounded-full text-sm flex items-center gap-1" style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>
                 {getSourceIcon(selectedRecipe.source)}
                 {getSourceLabel(selectedRecipe.source)}
               </span>
             </div>
 
             {selectedRecipe.description && (
-              <p className="text-warm-600 mb-4">{selectedRecipe.description}</p>
+              <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>{selectedRecipe.description}</p>
             )}
 
-            <p className="text-sm text-warm-400">
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
               {formatDate(selectedRecipe.createdAt)} 저장됨
             </p>
           </div>
 
           {/* 재료 */}
           <div className="recipe-card p-5 mb-4">
-            <h2 className="font-handwriting text-xl text-warm-800 mb-4 flex items-center gap-2">
+            <h2 className="font-handwriting text-xl mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <span>🥬</span> 재료
-              <span className="text-sm font-normal text-warm-500">
+              <span className="text-sm font-normal" style={{ color: 'var(--text-muted)' }}>
                 ({selectedRecipe.ingredients.length}가지)
               </span>
             </h2>
@@ -159,10 +161,11 @@ export default function RecipeList() {
               {selectedRecipe.ingredients.map((ingredient, index) => (
                 <div
                   key={index}
-                  className="p-3 bg-gradient-to-br from-warm-50 to-orange-50 rounded-xl"
+                  className="p-3 rounded-xl"
+                  style={{ background: 'var(--bg-secondary)' }}
                 >
-                  <p className="font-medium text-warm-800">{ingredient.name}</p>
-                  <p className="text-sm text-warm-500">
+                  <p className="font-medium" style={{ color: 'var(--text-primary)' }}>{ingredient.name}</p>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
                     {ingredient.amount} {ingredient.unit}
                   </p>
                 </div>
@@ -172,24 +175,30 @@ export default function RecipeList() {
 
           {/* 조리 단계 */}
           <div className="recipe-card p-5 mb-4">
-            <h2 className="font-handwriting text-xl text-warm-800 mb-4 flex items-center gap-2">
+            <h2 className="font-handwriting text-xl mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <span>👨‍🍳</span> 조리 순서
             </h2>
             <div className="space-y-4">
               {selectedRecipe.steps.map((step, index) => (
                 <div key={index} className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+                  <div
+                    className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md"
+                    style={{ background: 'var(--gradient-accent)' }}
+                  >
                     {step.order}
                   </div>
                   <div className="flex-1 pt-2">
-                    <p className="text-warm-700 leading-relaxed">{step.instruction}</p>
+                    <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{step.instruction}</p>
                     {step.duration && (
-                      <p className="mt-2 text-sm text-warm-500 flex items-center gap-1">
+                      <p className="mt-2 text-sm flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
                         <span>⏱️</span> {step.duration}
                       </p>
                     )}
                     {step.tip && (
-                      <p className="mt-1 text-sm text-orange-600 bg-orange-50 px-3 py-2 rounded-lg flex items-start gap-1">
+                      <p
+                        className="mt-1 text-sm px-3 py-2 rounded-lg flex items-start gap-1"
+                        style={{ color: 'var(--accent-600)', background: 'var(--accent-50)' }}
+                      >
                         <span>💡</span> {step.tip}
                       </p>
                     )}
@@ -201,9 +210,9 @@ export default function RecipeList() {
 
           {/* 원본 텍스트 (음성인 경우) */}
           {selectedRecipe.originalTranscript && (
-            <div className="recipe-card p-5 bg-warm-50">
-              <h3 className="text-sm font-medium text-warm-500 mb-2">원본 음성 기록</h3>
-              <p className="text-sm text-warm-600 italic leading-relaxed">
+            <div className="recipe-card p-5" style={{ background: 'var(--bg-secondary)' }}>
+              <h3 className="text-sm font-medium mb-2" style={{ color: 'var(--text-muted)' }}>원본 음성 기록</h3>
+              <p className="text-sm italic leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 &quot;{selectedRecipe.originalTranscript}&quot;
               </p>
             </div>
@@ -212,7 +221,8 @@ export default function RecipeList() {
           {/* 삭제 버튼 */}
           <button
             onClick={() => setShowDeleteConfirm(selectedRecipe.id)}
-            className="w-full mt-4 py-3 border border-red-200 text-red-500 rounded-xl hover:bg-red-50 transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-4 py-3 rounded-xl transition-colors flex items-center justify-center gap-2 border"
+            style={{ borderColor: 'var(--error-border)', color: 'var(--error-text)' }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -229,11 +239,11 @@ export default function RecipeList() {
     return (
       <div className="p-4 pb-24 flex items-center justify-center min-h-[300px]">
         <div className="text-center">
-          <svg className="w-8 h-8 animate-spin mx-auto mb-3 text-orange-500" fill="none" viewBox="0 0 24 24">
+          <svg className="w-8 h-8 animate-spin mx-auto mb-3" style={{ color: 'var(--accent-500)' }} fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
           </svg>
-          <p className="text-warm-500">레시피 불러오는 중...</p>
+          <p style={{ color: 'var(--text-muted)' }}>레시피 불러오는 중...</p>
         </div>
       </div>
     );
@@ -243,21 +253,24 @@ export default function RecipeList() {
     <div className="p-4 pb-24">
       {recipes.length === 0 ? (
         <div className="recipe-card p-8 text-center">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-warm-100 to-orange-100 flex items-center justify-center">
+          <div
+            className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center"
+            style={{ background: 'var(--bg-secondary)' }}
+          >
             <span className="text-4xl">📝</span>
           </div>
-          <h3 className="font-handwriting text-xl text-warm-700 mb-2">
+          <h3 className="font-handwriting text-xl mb-2" style={{ color: 'var(--text-secondary)' }}>
             아직 저장된 레시피가 없어요
           </h3>
-          <p className="text-sm text-warm-500">
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
             음성 녹음이나 사진 분석으로<br />첫 번째 레시피를 만들어보세요!
           </p>
         </div>
       ) : (
         <>
-          <h2 className="font-handwriting text-2xl text-warm-800 mb-4 flex items-center gap-2">
+          <h2 className="font-handwriting text-2xl mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <span>📚</span> 나의 레시피
-            <span className="text-base font-normal text-warm-500">
+            <span className="text-base font-normal" style={{ color: 'var(--text-muted)' }}>
               ({recipes.length}개)
             </span>
           </h2>
@@ -278,21 +291,24 @@ export default function RecipeList() {
                     className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
                   />
                 ) : (
-                  <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center flex-shrink-0">
+                  <div
+                    className="w-20 h-20 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'var(--bg-secondary)' }}
+                  >
                     <span className="text-3xl">{getSourceIcon(recipe.source)}</span>
                   </div>
                 )}
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-handwriting text-lg text-warm-800 truncate">
+                  <h3 className="font-handwriting text-lg truncate" style={{ color: 'var(--text-primary)' }}>
                     {recipe.title}
                   </h3>
                   {recipe.description && (
-                    <p className="text-sm text-warm-500 truncate mt-1">
+                    <p className="text-sm truncate mt-1" style={{ color: 'var(--text-muted)' }}>
                       {recipe.description}
                     </p>
                   )}
-                  <div className="flex items-center gap-3 mt-2 text-xs text-warm-400">
+                  <div className="flex items-center gap-3 mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
                     <span className="flex items-center gap-1">
                       🥬 {recipe.ingredients.length}가지
                     </span>
@@ -303,7 +319,7 @@ export default function RecipeList() {
                   </div>
                 </div>
 
-                <svg className="w-5 h-5 text-warm-300 flex-shrink-0 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 flex-shrink-0 self-center" style={{ color: 'var(--text-muted)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>

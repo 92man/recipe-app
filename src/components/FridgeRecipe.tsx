@@ -73,6 +73,9 @@ export default function FridgeRecipe() {
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('로그인 후 이용할 수 있습니다.');
+        }
         throw new Error(data.error || '레시피 추천에 실패했습니다.');
       }
 

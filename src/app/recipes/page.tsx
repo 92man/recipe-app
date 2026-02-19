@@ -98,6 +98,66 @@ const popularRecipes = [
     emoji: '🍙',
     tags: ['도시락', '김', '간편식'],
   },
+  {
+    id: 'jeyuk-bokkeum',
+    title: '제육볶음',
+    description: '매콤한 양념에 볶은 돼지고기의 불맛. 밥 한 공기 뚝딱 비우게 만드는 밥도둑입니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '30분',
+    emoji: '🔥',
+    tags: ['돼지고기', '매운맛', '밥반찬'],
+  },
+  {
+    id: 'dakgalbi',
+    title: '닭갈비',
+    description: '매콤한 양념에 닭고기와 채소를 볶은 춘천 대표 음식. 치즈를 올리면 더욱 맛있습니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '35분',
+    emoji: '🍗',
+    tags: ['닭고기', '매운맛', '철판'],
+  },
+  {
+    id: 'gamjatang',
+    title: '감자탕',
+    description: '돼지 등뼈를 푹 끓인 진한 국물의 탕 요리. 해장에도 좋은 든든한 한 끼입니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '50분',
+    emoji: '🥘',
+    tags: ['국물요리', '돼지고기', '해장'],
+  },
+  {
+    id: 'gyeran-jjim',
+    title: '계란찜',
+    description: '폭신폭신 부드러운 달걀 반찬. 아이부터 어른까지 좋아하는 가정식 메뉴입니다.',
+    category: '한식',
+    difficulty: '쉬움',
+    time: '15분',
+    emoji: '🥚',
+    tags: ['반찬', '달걀', '간편식'],
+  },
+  {
+    id: 'janchi-guksu',
+    title: '잔치국수',
+    description: '맑은 멸치 육수에 소면을 말아 먹는 따뜻한 국수. 정겨운 잔치의 맛입니다.',
+    category: '한식',
+    difficulty: '쉬움',
+    time: '20분',
+    emoji: '🍜',
+    tags: ['면요리', '국물', '잔치'],
+  },
+  {
+    id: 'dakbokkeum-tang',
+    title: '닭볶음탕',
+    description: '매콤하게 조린 닭과 감자의 든든한 한 냄비. 온 가족 함께 먹기 좋은 요리입니다.',
+    category: '한식',
+    difficulty: '보통',
+    time: '45분',
+    emoji: '🍗',
+    tags: ['닭고기', '매운맛', '탕'],
+  },
   // 양식
   {
     id: 'carbonara',
@@ -149,6 +209,46 @@ const popularRecipes = [
     emoji: '🍳',
     tags: ['볶음밥', '달걀', '케첩'],
   },
+  {
+    id: 'gambas',
+    title: '감바스',
+    description: '마늘향 가득한 올리브오일에 새우를 볶은 스페인 타파스. 바게트와 함께 즐기세요.',
+    category: '양식',
+    difficulty: '쉬움',
+    time: '15분',
+    emoji: '🦐',
+    tags: ['새우', '타파스', '와인안주'],
+  },
+  {
+    id: 'risotto',
+    title: '리조또',
+    description: '크리미한 이탈리안 쌀 요리. 버터와 치즈의 풍미가 어우러진 부드러운 한 그릇입니다.',
+    category: '양식',
+    difficulty: '보통',
+    time: '35분',
+    emoji: '🍚',
+    tags: ['쌀요리', '이탈리안', '크림'],
+  },
+  {
+    id: 'french-toast',
+    title: '프렌치토스트',
+    description: '계란물에 적신 빵을 버터에 구운 달콤한 브런치. 메이플시럽과 함께 즐기세요.',
+    category: '양식',
+    difficulty: '쉬움',
+    time: '15분',
+    emoji: '🍞',
+    tags: ['브런치', '달콤', '아침식사'],
+  },
+  {
+    id: 'hamburg-steak',
+    title: '함박스테이크',
+    description: '육즙 가득한 수제 햄버그 스테이크. 데미글라스 소스를 곁들인 정통 양식입니다.',
+    category: '양식',
+    difficulty: '보통',
+    time: '30분',
+    emoji: '🍖',
+    tags: ['소고기', '메인요리', '소스'],
+  },
   // 중식
   {
     id: 'fried-rice',
@@ -189,6 +289,26 @@ const popularRecipes = [
     time: '50분',
     emoji: '🍖',
     tags: ['튀김', '돼지고기', '파티음식'],
+  },
+  {
+    id: 'mapo-tofu',
+    title: '마파두부',
+    description: '얼얼하고 매콤한 사천식 두부 요리. 부드러운 두부와 매운 소스가 밥과 완벽한 궁합입니다.',
+    category: '중식',
+    difficulty: '보통',
+    time: '25분',
+    emoji: '🌶️',
+    tags: ['두부', '매운맛', '사천'],
+  },
+  {
+    id: 'kkangpung-gi',
+    title: '깐풍기',
+    description: '바삭한 튀김 닭에 매콤달콤 소스를 입힌 요리. 밥반찬이나 안주로 최고입니다.',
+    category: '중식',
+    difficulty: '어려움',
+    time: '40분',
+    emoji: '🍗',
+    tags: ['닭고기', '튀김', '매콤달콤'],
   },
   // 일식
   {
@@ -241,19 +361,51 @@ const popularRecipes = [
     emoji: '🥩',
     tags: ['덮밥', '소고기', '간편식'],
   },
+  {
+    id: 'ramen',
+    title: '라멘',
+    description: '진한 육수에 쫄깃한 면과 다양한 토핑. 깊고 풍부한 맛의 일본식 라면입니다.',
+    category: '일식',
+    difficulty: '보통',
+    time: '30분',
+    emoji: '🍜',
+    tags: ['면요리', '국물', '토핑'],
+  },
+  {
+    id: 'oyakodon',
+    title: '오야코동',
+    description: '닭고기와 부드러운 반숙 계란의 덮밥. 간단하면서도 깊은 맛의 일본 가정식입니다.',
+    category: '일식',
+    difficulty: '쉬움',
+    time: '20분',
+    emoji: '🍛',
+    tags: ['덮밥', '닭고기', '달걀'],
+  },
+  {
+    id: 'tendon',
+    title: '텐동',
+    description: '바삭한 텐푸라를 올린 달콤짭짤한 덮밥. 새우와 채소 튀김의 조화가 일품입니다.',
+    category: '일식',
+    difficulty: '보통',
+    time: '30분',
+    emoji: '🍤',
+    tags: ['덮밥', '튀김', '새우'],
+  },
 ];
 
 const categories = [
-  { name: '한식', emoji: '🇰🇷', count: 9, color: 'var(--accent-100)', slug: 'korean' },
-  { name: '양식', emoji: '🍝', count: 5, color: 'var(--info-bg)', slug: 'western' },
-  { name: '중식', emoji: '🥡', count: 4, color: 'var(--error-bg)', slug: 'chinese' },
-  { name: '일식', emoji: '🍣', count: 5, color: 'var(--success-bg)', slug: 'japanese' },
+  { name: '한식', emoji: '🇰🇷', count: 15, color: 'var(--accent-100)', slug: 'korean' },
+  { name: '양식', emoji: '🍝', count: 9, color: 'var(--info-bg)', slug: 'western' },
+  { name: '중식', emoji: '🥡', count: 6, color: 'var(--error-bg)', slug: 'chinese' },
+  { name: '일식', emoji: '🍣', count: 8, color: 'var(--success-bg)', slug: 'japanese' },
 ];
 
 const cookingTips = [
   { title: '김치찌개 꿀팁', tip: '김치를 먼저 볶아주면 더 깊은 맛이 납니다' },
   { title: '불고기 꿀팁', tip: '배즙을 넣으면 고기가 더 부드러워집니다' },
   { title: '파스타 꿀팁', tip: '면수를 조금 넣으면 소스가 더 잘 어우러집니다' },
+  { title: '감바스 꿀팁', tip: '마늘은 약불에서 천천히 볶아야 향이 깊어집니다' },
+  { title: '라멘 꿀팁', tip: '면은 살짝 덜 익혀서 국물에 넣으면 쫄깃함이 유지됩니다' },
 ];
 
 export default function RecipesPage() {
@@ -414,19 +566,19 @@ export default function RecipesPage() {
             초보자부터 숙련된 요리사까지, 누구나 쉽게 따라할 수 있는 레시피를 제공합니다.
           </p>
           <p className="mb-4">
-            <strong style={{ color: 'var(--text-secondary)' }}>한식</strong>: 김치찌개, 된장찌개, 불고기, 비빔밥, 삼겹살, 떡볶이 등 전통 한국 요리의 정수를 담았습니다.
+            <strong style={{ color: 'var(--text-secondary)' }}>한식</strong>: 김치찌개, 된장찌개, 불고기, 비빔밥, 삼겹살, 떡볶이, 제육볶음, 닭갈비, 감자탕, 잔치국수 등 전통 한국 요리의 정수를 담았습니다.
             정확한 계량과 조리 순서로 본연의 맛을 재현할 수 있습니다.
           </p>
           <p className="mb-4">
-            <strong style={{ color: 'var(--text-secondary)' }}>양식</strong>: 파스타, 스테이크, 오므라이스 등 서양 요리를 가정에서도 쉽게 만들어보세요.
+            <strong style={{ color: 'var(--text-secondary)' }}>양식</strong>: 파스타, 스테이크, 오므라이스, 감바스, 리조또, 프렌치토스트, 함박스테이크 등 서양 요리를 가정에서도 쉽게 만들어보세요.
             레스토랑 못지않은 맛을 경험하실 수 있습니다.
           </p>
           <p className="mb-4">
-            <strong style={{ color: 'var(--text-secondary)' }}>중식</strong>: 볶음밥, 짜장면, 짬뽕, 탕수육 등 중국 요리의 풍미를 집에서 즐겨보세요.
+            <strong style={{ color: 'var(--text-secondary)' }}>중식</strong>: 볶음밥, 짜장면, 짬뽕, 탕수육, 마파두부, 깐풍기 등 중국 요리의 풍미를 집에서 즐겨보세요.
             간단한 재료로도 풍성한 한 끼를 만들 수 있습니다.
           </p>
           <p>
-            <strong style={{ color: 'var(--text-secondary)' }}>일식</strong>: 카츠동, 우동, 카레라이스, 타코야키, 규동 등 일본 요리를 집에서 즐겨보세요.
+            <strong style={{ color: 'var(--text-secondary)' }}>일식</strong>: 카츠동, 우동, 카레라이스, 타코야키, 규동, 라멘, 오야코동, 텐동 등 일본 요리를 집에서 즐겨보세요.
             정갈하고 깔끔한 맛의 일식을 직접 만들어보실 수 있습니다.
           </p>
         </div>
