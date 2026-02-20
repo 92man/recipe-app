@@ -4,8 +4,8 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: '문의하기 - 맛있는 기록',
   description: '맛있는 기록에 문의사항이 있으시면 언제든 연락주세요. 레시피 제안, 기능 요청, 버그 신고 등 모든 피드백을 환영합니다.',
-  alternates: { canonical: '/contact' },
-  openGraph: { url: '/contact' },
+  alternates: { canonical: 'https://tasty-record.com/contact' },
+  openGraph: { url: 'https://tasty-record.com/contact' },
 };
 
 export default function ContactPage() {

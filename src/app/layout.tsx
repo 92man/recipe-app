@@ -39,9 +39,6 @@ export const metadata: Metadata = {
     title: "맛있는 기록 - AI 레시피 노트",
     description: "음성으로 레시피를 기록하고, 사진으로 요리를 분석하세요.",
   },
-  alternates: {
-    canonical: './',
-  },
   robots: {
     index: true,
     follow: true,

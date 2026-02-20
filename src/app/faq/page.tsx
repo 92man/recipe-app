@@ -4,8 +4,8 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: '자주 묻는 질문 (FAQ) - 맛있는 기록',
   description: '맛있는 기록 서비스에 대해 자주 묻는 질문과 답변을 확인하세요. 레시피 저장, AI 기능, 계정 관리 등에 대한 정보를 제공합니다.',
-  alternates: { canonical: '/faq' },
-  openGraph: { url: '/faq' },
+  alternates: { canonical: 'https://tasty-record.com/faq' },
+  openGraph: { url: 'https://tasty-record.com/faq' },
 };
 
 const faqData = [

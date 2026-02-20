@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: '중식 레시피 모음 - 맛있는 기록 | 짜장면, 짬뽕, 탕수육, 볶음밥',
   description: '중국 요리 레시피를 만나보세요. 짜장면, 짬뽕, 탕수육, 볶음밥 등 중화요리의 정수를 집에서 직접 만드는 상세한 조리법을 알려드립니다.',
   keywords: ['중식', '중국요리', '짜장면', '짬뽕', '탕수육', '볶음밥', '레시피'],
-  alternates: { canonical: '/recipes/category/chinese' },
-  openGraph: { url: '/recipes/category/chinese' },
+  alternates: { canonical: 'https://tasty-record.com/recipes/category/chinese' },
+  openGraph: { url: 'https://tasty-record.com/recipes/category/chinese' },
 };
 
 const chineseRecipes = [

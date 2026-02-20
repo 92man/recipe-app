@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: '한식 레시피 모음 - 맛있는 기록 | 김치찌개, 불고기, 비빔밥',
   description: '전통 한국 요리 레시피를 만나보세요. 김치찌개, 된장찌개, 불고기, 비빔밥, 삼겹살 등 한국인이 사랑하는 한식 요리법을 상세히 알려드립니다.',
   keywords: ['한식', '한국요리', '김치찌개', '불고기', '비빔밥', '된장찌개', '레시피'],
-  alternates: { canonical: '/recipes/category/korean' },
-  openGraph: { url: '/recipes/category/korean' },
+  alternates: { canonical: 'https://tasty-record.com/recipes/category/korean' },
+  openGraph: { url: 'https://tasty-record.com/recipes/category/korean' },
 };
 
 const koreanRecipes = [

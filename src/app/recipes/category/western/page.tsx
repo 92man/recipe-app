@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: '양식 레시피 모음 - 맛있는 기록 | 파스타, 스테이크, 오므라이스',
   description: '맛있는 서양 요리 레시피를 만나보세요. 카르보나라, 토마토 파스타, 스테이크, 오므라이스 등 레스토랑 맛 그대로 집에서 즐기는 양식 조리법.',
   keywords: ['양식', '서양요리', '파스타', '스테이크', '카르보나라', '오므라이스', '레시피'],
-  alternates: { canonical: '/recipes/category/western' },
-  openGraph: { url: '/recipes/category/western' },
+  alternates: { canonical: 'https://tasty-record.com/recipes/category/western' },
+  openGraph: { url: 'https://tasty-record.com/recipes/category/western' },
 };
 
 const westernRecipes = [
