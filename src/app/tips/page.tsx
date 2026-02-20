@@ -4,6 +4,8 @@ export const metadata = {
   title: '요리 팁 & 노하우 - 맛있는 기록 | 요리 꿀팁 모음',
   description: '요리를 더 맛있게 만드는 꿀팁과 노하우. 재료 보관법, 맛내기 비법, 시간 단축 팁, 실패 방지 노하우를 알려드립니다. 초보 요리사도 쉽게 따라할 수 있는 실용적인 팁.',
   keywords: ['요리 팁', '요리 노하우', '요리 꿀팁', '재료 보관법', '맛내기 비법', '요리 초보'],
+  alternates: { canonical: '/tips' },
+  openGraph: { url: '/tips' },
 };
 
 const tips = [

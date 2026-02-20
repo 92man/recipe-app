@@ -4,6 +4,8 @@ export const metadata = {
   title: '인기 레시피 모음 - 맛있는 기록 | 한식, 양식, 중식 레시피',
   description: '가장 인기 있는 한식, 양식, 중식 레시피를 만나보세요. 초보자도 쉽게 따라할 수 있는 상세한 레시피와 조리법을 제공합니다. 김치찌개, 불고기, 카르보나라 등 다양한 요리 레시피.',
   keywords: ['레시피', '한식', '양식', '중식', '요리법', '김치찌개', '불고기', '카르보나라', '요리 초보'],
+  alternates: { canonical: '/recipes' },
+  openGraph: { url: '/recipes' },
 };
 
 const popularRecipes = [

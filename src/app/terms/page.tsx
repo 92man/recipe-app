@@ -3,6 +3,8 @@ import Link from 'next/link';
 export const metadata = {
   title: '이용약관 - 맛있는 기록',
   description: '맛있는 기록 앱의 서비스 이용약관입니다.',
+  alternates: { canonical: '/terms' },
+  openGraph: { url: '/terms' },
 };
 
 export default function Terms() {

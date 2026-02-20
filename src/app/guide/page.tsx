@@ -3,6 +3,8 @@ import Link from 'next/link';
 export const metadata = {
   title: '요리 초보 가이드 - 맛있는 기록',
   description: '요리를 처음 시작하는 분들을 위한 기초 가이드. 필수 조리도구, 기본 양념, 계량법 등을 알려드립니다.',
+  alternates: { canonical: '/guide' },
+  openGraph: { url: '/guide' },
 };
 
 export default function GuidePage() {

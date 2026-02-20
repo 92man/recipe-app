@@ -1372,7 +1372,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     description: `${recipe.title} 만드는 법: ${recipe.description}. ${recipe.time} 소요, ${recipe.difficulty} 난이도. 재료와 조리법을 상세히 알려드립니다.`,
     keywords: [recipe.title, recipe.category, '레시피', '요리법', '만드는법', ...recipe.ingredients.map(i => i.name)],
     authors: [{ name: recipe.author }],
+    alternates: { canonical: `/recipes/${id}` },
     openGraph: {
+      url: `/recipes/${id}`,
       title: `${recipe.title} 레시피`,
       description: recipe.description,
       type: 'article',

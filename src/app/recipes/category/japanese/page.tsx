@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: '일식 레시피 모음 - 맛있는 기록 | 카츠동, 우동, 카레, 타코야키',
   description: '일본 요리 레시피를 만나보세요. 카츠동, 우동, 카레라이스, 타코야키, 규동 등 정갈한 일식 요리를 집에서 만드는 상세한 조리법.',
   keywords: ['일식', '일본요리', '카츠동', '우동', '카레', '타코야키', '규동', '레시피'],
+  alternates: { canonical: '/recipes/category/japanese' },
+  openGraph: { url: '/recipes/category/japanese' },
 };
 
 const japaneseRecipes = [

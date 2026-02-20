@@ -3,6 +3,8 @@ import Link from 'next/link';
 export const metadata = {
   title: '서비스 소개 - 맛있는 기록',
   description: '맛있는 기록은 AI를 활용한 스마트 레시피 기록 앱입니다.',
+  alternates: { canonical: '/about' },
+  openGraph: { url: '/about' },
 };
 
 export default function About() {

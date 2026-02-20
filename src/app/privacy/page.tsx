@@ -3,6 +3,8 @@ import Link from 'next/link';
 export const metadata = {
   title: '개인정보처리방침 - 맛있는 기록',
   description: '맛있는 기록 앱의 개인정보처리방침입니다.',
+  alternates: { canonical: '/privacy' },
+  openGraph: { url: '/privacy' },
 };
 
 export default function PrivacyPolicy() {
