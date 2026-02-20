@@ -7,6 +7,7 @@ import CookieConsent from "@/components/CookieConsent";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tasty-record.com"),
   title: "맛있는 기록 - AI 레시피 노트 | 음성 기록 & 사진 분석",
   description: "음성으로 레시피를 기록하고, 사진으로 요리를 분석하세요. AI가 재료와 조리법을 자동으로 정리해드립니다. 나만의 레시피 컬렉션을 만들어보세요.",
   keywords: ["레시피", "요리", "AI", "음성인식", "사진분석", "요리앱", "레시피앱", "cooking", "recipe"],
@@ -29,8 +30,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "맛있는 기록 - AI 레시피 노트",
     description: "음성으로 레시피를 기록하고, 사진으로 요리를 분석하세요.",
+    url: "https://tasty-record.com",
     type: "website",
     locale: "ko_KR",
+    siteName: "맛있는 기록",
   },
   twitter: {
     card: "summary_large_image",
